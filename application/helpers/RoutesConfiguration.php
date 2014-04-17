@@ -15,4 +15,9 @@ $routes[] = array(
     'controller' => 'FishController'
 );
 
+$routes[] = array(
+    'resource' => 'users',
+    'controller' => 'UserController'
+);
+
 return new \GoFish\Application\Helpers\RouteCollection($routes);

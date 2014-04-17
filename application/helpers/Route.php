@@ -10,31 +10,31 @@
 namespace GoFish\Application\Helpers;
 
 
+
 use GoFish\Application\Helpers\exceptionHandlers\ApplicationException;
 use GoFish\Application\Models\Request;
 
 class Route
 {
-//    protected $requestMethodCollection = 'GET';
-    protected $resource = 'fishes';
-    protected $controller = 'GoFish\Application\Controllers\FishController';
+    protected $resource;
+    protected $controller;
+    // allowed request methods
+
+    public function __construct(array $data){
+        foreach($data as $key => $value){
+            $this->$key = $value;
+        }
+    }
 
     private function getResource()
     {
         return $this->resource;
     }
 
-//    Public function setRequestMethodCollection(){
-//        $this->requestMethodCollection = new RequestMethodCollection();
-//    }
-
-//    private function getRequestType(){
-//        return $this->requestType;
-//    }
-
     private function getController()
     {
-        return new $this->controller();
+        $controller = 'GoFish\Application\Controllers\\' . $this->controller; // TODO remove hard coding.
+        return new $controller();
     }
 
     public function isMatchingRoute($stringToMatch)
@@ -51,7 +51,7 @@ class Route
      * @param $id
      * @param Request $request
      * @return mixed
-     * @throws Exception
+     * @throws ApplicationException
      */
     public function callMethod(Request $request)
     {

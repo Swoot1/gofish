@@ -23,11 +23,14 @@ class FishController
         $this->setFishService($fishService);
     }
 
-    private function setFishService($caughtFishService)
+    private function setFishService($fishService)
     {
-        $this->fishService = $caughtFishService;
+        $this->fishService = $fishService;
     }
 
+    /**
+     * @return GoFish\Application\Services\FishService
+     */
     private function getFishService()
     {
         return $this->fishService;
