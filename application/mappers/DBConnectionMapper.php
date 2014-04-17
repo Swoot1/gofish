@@ -21,6 +21,7 @@ class DBConnectionMapper
         $this->setDBConnection($DBConnection);
     }
 
+    // TODO don't extend this function. inject it.
     private function getDBConnection()
     {
         return $this->DBConnection;

@@ -1,7 +1,7 @@
 <?php
 
-require_once 'application/helpers/Autoloader.php';
-require_once 'application/helpers/Configuration.php';
+require_once 'Application/Helpers/Autoloader.php';
+require_once 'Application/Helpers/Configuration.php';
 
 putenv('TMP=C:/temp');
 
@@ -14,7 +14,7 @@ $autoLoader->setUpAutoLoader();
 $requestDispatcher = new \GoFish\Application\Helpers\RequestDispatcher();
 $requestModel = $requestDispatcher->getRequestModel();
 
-$routeCollection = include_once 'application/helpers/RoutesConfiguration.php';
+$routeCollection = include_once 'Application/Helpers/RoutesConfiguration.php';
 
 $route = $routeCollection->getRoute($requestModel);
 
@@ -23,10 +23,7 @@ if ($route) {
     $result = json_encode($result ? $result->toArray() : array(), JSON_UNESCAPED_UNICODE);
 }
 
-//$middleware = new \GoFish\Application\Helpers\Middleware($requestModel);
-//
-//$response = $middleware->getResponse();
-header('Content-Type: application/json; charset=utf-8');
+header('Content-Type: Application/json; charset=utf-8');
 echo $result;
 
 

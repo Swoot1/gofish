@@ -10,6 +10,7 @@
 namespace GoFish\Application\Helpers;
 
 
+use GoFish\Application\Helpers\exceptionHandlers\ApplicationException;
 use GoFish\Application\Models\Request;
 
 class Route
@@ -17,14 +18,13 @@ class Route
 //    protected $requestMethodCollection = 'GET';
     protected $resource = 'fishes';
     protected $controller = 'GoFish\Application\Controllers\FishController';
-    protected $actions; // TODO
 
     private function getResource()
     {
         return $this->resource;
     }
 
-//    public function setRequestMethodCollection(){
+//    Public function setRequestMethodCollection(){
 //        $this->requestMethodCollection = new RequestMethodCollection();
 //    }
 
@@ -66,7 +66,7 @@ class Route
             if ($id = trim(preg_replace('/' . $this->getResource() . '/', '', $request->getRequestURI()), '/')) {
                 $result = $controller->delete($id);
             } else {
-                throw Exception('Implement exception class.');
+                throw new ApplicationException('Ange ett id för borttagning.');
             }
         } else if ($request->getRequestMethod() === 'POST') {
             $requestData = $request->getRequestData();
@@ -76,10 +76,10 @@ class Route
             if ($id = trim(preg_replace('/' . $this->getResource() . '/', '', $request->getRequestURI()), '/')) {
                 $result = $controller->update($id, $requestData);
             } else {
-                throw Exception('Implement exception class.');
+                throw new ApplicationException('Ange ett id för uppdatering.');
             }
         }else {
-            throw new Exception('Implement PUT etc.');
+            throw new ApplicationException('Ogiltig request-metod.');
         }
 
         return $result;

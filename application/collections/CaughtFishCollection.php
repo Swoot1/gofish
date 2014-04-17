@@ -9,7 +9,7 @@
 
 namespace GoFish\Application\Collections;
 
-class CaughtFishCollection
+class CaughtFishCollection extends GeneralCollection
 {
     private $data;
 

@@ -11,6 +11,7 @@ namespace GoFish\Application\Models;
 
 
 use GoFish\Application\Collections\RequestMethodCollection;
+use GoFish\Application\Helpers\exceptionHandlers\ApplicationException;
 
 require_once 'GeneralModel.php';
 
@@ -82,8 +83,7 @@ class Request extends GeneralModel
         $isValidRequestMethod = $requestMethodCollection->isValidRequestMethod($methodName);
 
         if (!$isValidRequestMethod) {
-            // TODO fix new exception class.
-            throw new \Exception('Ange en vettig request-typ för bövelen.');
+            throw new ApplicationException('Ange en vettig request-typ för bövelen.');
         }
 
         return true;
