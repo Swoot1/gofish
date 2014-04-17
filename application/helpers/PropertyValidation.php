@@ -8,66 +8,89 @@
  */
 namespace GoFish\Application\Helpers;
 
-class PropertyValidation {
-    protected $dataType;
-    protected $minLength;
-    protected $maxLength;
+use GoFish\Application\Helpers\exceptionHandlers\ApplicationException;
+
+class PropertyValidation
+{
+//    protected $dataTypeValidation;
+    protected $minLength = 1;
+    protected $maxLength = null;
     protected $genericName;
+    protected $propertyName;
     protected $allowNull = false;
 
-    public function __construct($data){
-
-    }
-
-    private function setDataType($dataType)
+    public function __construct($data)
     {
-        $this->dataType = $dataType;
+        foreach($data as $propertyName => $value){
+            $this->$propertyName = $value;
+        }
     }
 
-    public function getDataType()
+    public function validate($value)
     {
-        return $this->dataType;
+        $this->validateNull($value);
+        $this->validateMinLength($value);
+        $this->validateMaxLength($value);
     }
 
-    private function setGenericName($genericName)
+    /**
+     * @param $value
+     * @return bool
+     * @throws exceptionHandlers\ApplicationException
+     */
+    private function validateNull($value)
     {
-        $this->genericName = $genericName;
+        if ($value === null && $this->allowNull === false) {
+            throw new ApplicationException('Ange ett värde för ' . $this->genericName);
+        }
+
+        return true;
     }
 
-    public function getGenericName()
+    /**
+     * @param $value
+     * @return bool
+     * @throws exceptionHandlers\ApplicationException
+     */
+    private function validateMinLength($value)
     {
-        return $this->genericName;
+        if (strlen($value) < $this->minLength) {
+            throw new ApplicationException($this->genericName . 'måste vara minst' . $this->minLength . 'långt.');
+        }
+
+        return true;
     }
 
-    private function setMaxLength($maxLength)
+    /**
+     * @param $value
+     * @return bool
+     * @throws exceptionHandlers\ApplicationException
+     */
+    private function validateMaxLength($value)
     {
-        $this->maxLength = $maxLength;
+        if ($this->maxLength && strlen($value > $this->maxLength)) {
+            throw new ApplicationException($this->genericName . 'får vara högst' . $this->maxLength . 'långt.');
+        }
+
+        return true;
     }
 
-    public function getMaxLength()
+    /**
+     * @param $data
+     * @return bool
+     */
+    public function hasMatchingData($data)
     {
-        return $this->maxLength;
-    }
+        $result = true;
 
-    private function setMinLength($minLength)
-    {
-        $this->minLength = $minLength;
-    }
+        foreach ($data as $propertyName => $value) {
+            if ($this->$propertyName !== $value) {
+                $result = false;
+                break;
+            }
+        }
 
-    public function getMinLength()
-    {
-        return $this->minLength;
+        return $result;
     }
-
-    private function setAllowNull($allowNull)
-    {
-        $this->allowNull = $allowNull;
-    }
-
-    public function getAllowNull()
-    {
-        return $this->allowNull;
-    }
-
 
 }

@@ -10,11 +10,42 @@
 namespace GoFish\Application\Collections;
 
 
-class PropertyValidationCollection {
+class PropertyValidationCollection
+{
 
     protected $data;
+
     public function __construct(array $data)
     {
         $this->data = $data;
+    }
+
+    public function validate($name, $value)
+    {
+        $validations = $this->where(array('propertyName' => $name));
+        foreach ($validations as $validation) {
+            $validation->validate($value);
+        }
+
+        return true;
+    }
+
+    private function where(array $data)
+    {
+        $result = array();
+
+        foreach ($this->data as $model) {
+            $isMatch = true;
+
+            if ($model->hasMatchingData($data) === false) {
+                $isMatch = false;
+            }
+
+            if ($isMatch) {
+                $result[] = $model;
+            }
+        }
+
+        return $result;
     }
 }

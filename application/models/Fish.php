@@ -34,13 +34,17 @@ class Fish extends GeneralModel
     protected function setUpValidation()
     {
         $validation = new PropertyValidationCollection(array(
-            'id' => new PropertyValidation(array(
+            new PropertyValidation(array(
                     'dataType' => 'integer',
-                    'genericName' => 'FiskID')
+                    'genericName' => 'FiskID',
+                    'propertyName' => 'id'
+                )
             ),
-            'name' => new PropertyValidation(array(
+            new PropertyValidation(array(
                     'dataType' => 'integer',
-                    'genericName' => 'ID:t för fisktyp') // TODO skicka med propertyName ist för att ha det som nyckel?
+                    'genericName' => 'ID:t för fisktyp',
+                    'propertyName' => 'name'
+                )
             ),
 
         ));

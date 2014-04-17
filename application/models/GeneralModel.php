@@ -14,14 +14,14 @@ use GoFish\Application\Collections\PropertyValidationCollection;
 
 abstract class GeneralModel
 {
-    protected $_validation = array();
+    protected $_validation;
     protected $_noDBProperties = array();
     protected $_defaultValues = array();
 
     public function __construct(array $data = array())
     {
-        $this->setData($data);
         $this->setUpValidation();
+        $this->setData($data);
     }
 
     protected function setValidation(PropertyValidationCollection $validation)
@@ -47,31 +47,11 @@ abstract class GeneralModel
     private function setData(array $data)
     {
         foreach ($data as $propertyName => $value) {
-            $setFunctionName = $this->getSetFunctionName($propertyName);
-            $this->validateSetFunctionExists($setFunctionName);
-            $this->$setFunctionName($value);
+            $this->_validation->validate($propertyName, $value);
+            $this->$propertyName = $value;
         }
 
         return $this;
-    }
-
-    private function validateSetFunctionExists($setFunction)
-    {
-        if (!method_exists($this, $setFunction)) {
-            // TODO make exception class.
-            throw new \Exception('Buuuh! Funktionen finns inte.');
-        }
-
-        return true;
-    }
-
-    /**
-     * @param $propertyName
-     * @return string
-     */
-    private function getSetFunctionName($propertyName)
-    {
-        return 'set' . ucfirst($propertyName);
     }
 
     abstract protected function setUpValidation();
