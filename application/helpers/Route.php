@@ -12,7 +12,7 @@ namespace GoFish\Application\Helpers;
 
 
 use GoFish\Application\Helpers\exceptionHandlers\ApplicationException;
-use GoFish\Application\Models\Request;
+use GoFish\Application\ENFramework\Models\Request;
 
 class Route
 {

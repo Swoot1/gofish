@@ -9,9 +9,8 @@
 
 namespace GoFish\Application\Helpers;
 
-
-use GoFish\Application\Collections\GeneralCollection;
-use GoFish\Application\Models\Request;
+use GoFish\Application\ENFramework\Collections\GeneralCollection;
+use GoFish\Application\ENFramework\Models\Request;
 
 class RouteCollection extends GeneralCollection
 {

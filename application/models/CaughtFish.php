@@ -9,8 +9,9 @@
 
 namespace GoFish\Model;
 
-use GoFish\Collection\PropertyValidationCollection;
-use GoFish\Helper\PropertyValidation;
+use GoFish\Application\Collections\PropertyValidationCollection;
+use GoFish\Application\ENFramework\Models\GeneralModel;
+use GoFish\Application\Helpers\PropertyValidation;
 
 class CaughtFish extends GeneralModel
 {

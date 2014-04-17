@@ -10,6 +10,8 @@
 namespace GoFish\Application\Mappers;
 
 
+use GoFish\Application\ENFramework\Mappers\DBConnectionMapper;
+
 class FishMapper extends DBConnectionMapper
 {
     private $indexSQL = '

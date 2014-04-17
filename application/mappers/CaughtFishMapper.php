@@ -9,6 +9,7 @@
 
 namespace GoFish\Mapper;
 
+use GoFish\Application\ENFramework\Mappers\DBConnectionMapper;
 
 class CaughtFishMapper extends DBConnectionMapper
 {

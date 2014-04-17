@@ -10,16 +10,14 @@ namespace GoFish\Application\Models;
 
 
 use GoFish\Application\Collections\PropertyValidationCollection;
+use GoFish\Application\ENFramework\Models\GeneralModel;
 
 class User extends GeneralModel{
+
     protected $id;
     protected $name;
 
-
-
-
     protected function setUpValidation(){
-        $this->setValidation(new PropertyValidationCollection(array()));
+        $this->setValidation(new PropertyValidationCollection(array())); // TODO
     }
-
 } 

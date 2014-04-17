@@ -11,7 +11,7 @@ namespace GoFish\Application\Helpers;
 
 
 use GoFish\Application\Collections\RequestMethodCollection;
-use GoFish\Application\Models\Request;
+use GoFish\Application\ENFramework\Models\Request;
 
 class RequestBuilder
 {

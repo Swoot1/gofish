@@ -9,6 +9,8 @@
 namespace GoFish\Application\Collections;
 
 
+use GoFish\Application\ENFramework\Collections\GeneralCollection;
+
 class UserCollection extends GeneralCollection{
     protected $model = 'GoFish\Application\Models\User';
 } 

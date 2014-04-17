@@ -9,7 +9,7 @@
 
 namespace GoFish\Application\Collections;
 
-require_once 'GeneralCollection.php';
+use GoFish\Application\ENFramework\Collections\GeneralCollection;
 
 class FishCollection extends GeneralCollection{
     protected $model = 'GoFish\Application\Models\Fish';

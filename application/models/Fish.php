@@ -10,6 +10,7 @@
 namespace GoFish\Application\Models;
 
 use GoFish\Application\Collections\PropertyValidationCollection;
+use GoFish\Application\ENFramework\Models\GeneralModel;
 use GoFish\Application\Helpers\PropertyValidation;
 
 class Fish extends GeneralModel
