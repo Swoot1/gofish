@@ -41,7 +41,7 @@ class PropertyValidation
     private function validateNull($value)
     {
         if ($value === null && $this->allowNull === false) {
-            throw new ApplicationException('Ange ett värde för ' . $this->genericName);
+            throw new ApplicationException(sprintf('Ange ett värde för %s.'));
         }
 
         return true;
@@ -55,7 +55,7 @@ class PropertyValidation
     private function validateMinLength($value)
     {
         if (strlen($value) < $this->minLength) {
-            throw new ApplicationException($this->genericName . 'måste vara minst' . $this->minLength . 'långt.');
+            throw new ApplicationException(sprintf('%s måste vara minst %s långt.', $this->genericName, $this->minLength));
         }
 
         return true;
@@ -69,7 +69,7 @@ class PropertyValidation
     private function validateMaxLength($value)
     {
         if ($this->maxLength && strlen($value > $this->maxLength)) {
-            throw new ApplicationException($this->genericName . 'får vara högst' . $this->maxLength . 'långt.');
+            throw new ApplicationException(sprintf('%s får vara högst %s långt.', $this->genericName, $this->maxLength));
         }
 
         return true;
