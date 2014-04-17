@@ -76,6 +76,7 @@ class PropertyValidation
     }
 
     /**
+     * Checks if the data is set
      * @param $data
      * @return bool
      */

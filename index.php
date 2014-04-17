@@ -21,6 +21,8 @@ $route = $routeCollection->getRoute($requestModel);
 if ($route) {
     $result = $route->callMethod($requestModel);
     $result = json_encode($result ? $result->toArray() : array(), JSON_UNESCAPED_UNICODE);
+}else{
+    $result = array();
 }
 
 header('Content-Type: Application/json; charset=utf-8');
