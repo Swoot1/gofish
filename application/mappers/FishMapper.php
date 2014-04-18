@@ -9,11 +9,15 @@
 
 namespace GoFish\Application\Mappers;
 
+use GoFish\Application\ENFramework\Models\IDatabaseConnection;
 
-use GoFish\Application\ENFramework\Mappers\DBConnectionMapper;
-
-class FishMapper extends DBConnectionMapper
+class FishMapper
 {
+    /**
+     * @var \GoFish\Application\ENFramework\Models\IDatabaseConnection
+     */
+    private $databaseConnection;
+
     private $indexSQL = '
     SELECT
        id,
@@ -60,6 +64,10 @@ class FishMapper extends DBConnectionMapper
 
     ';
 
+    public function __construct(IDatabaseConnection $databaseConnection){
+        $this->databaseConnection = $databaseConnection;
+    }
+
     private function getIndexSQL()
     {
         return $this->indexSQL;
@@ -87,7 +95,7 @@ class FishMapper extends DBConnectionMapper
 
     public function index()
     {
-        $fishes = $this->runQuery($this->getIndexSQL(), array());
+        $fishes = $this->databaseConnection->runQuery($this->getIndexSQL(), array());
         return $fishes;
     }
 
@@ -95,18 +103,18 @@ class FishMapper extends DBConnectionMapper
     {
         unset($DBParameters['id']);
         $query = $this->getCreateSQL();
-        return $this->runQuery($query, $DBParameters);
+        return $this->databaseConnection->runQuery($query, $DBParameters);
     }
 
     public function update(array $DBParameters)
     {
         $query = $this->getUpdateSQL();
-        return $this->runQuery($query, $DBParameters);
+        return $this->databaseConnection->runQuery($query, $DBParameters);
     }
 
     public function read($id)
     {
-        $result = $this->runQuery($this->getReadSQL(), array('id' => $id));
+        $result = $this->databaseConnection->runQuery($this->getReadSQL(), array('id' => $id));
 
         return array_shift($result);
     }
@@ -114,6 +122,6 @@ class FishMapper extends DBConnectionMapper
     public function delete($id)
     {
         $query = $this->getDeleteSQL();
-        return $this->runQuery($query, array('id' => $id));
+        return $this->databaseConnection->runQuery($query, array('id' => $id));
     }
 }

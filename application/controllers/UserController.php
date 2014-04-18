@@ -9,6 +9,7 @@
 namespace GoFish\Application\Controllers;
 
 
+use GoFish\Application\ENFramework\Models\DatabaseConnection;
 use GoFish\Application\Mappers\UserMapper;
 use GoFish\Application\Services\UserService;
 
@@ -18,7 +19,8 @@ class UserController {
 
     public function __construct()
     {
-        $userMapper = new UserMapper();
+        $databaseConnection = new DatabaseConnection();
+        $userMapper = new UserMapper($databaseConnection);
         $userService = new UserService($userMapper);
         $this->setUserService($userService);
     }

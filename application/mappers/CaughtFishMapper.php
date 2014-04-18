@@ -9,10 +9,15 @@
 
 namespace GoFish\Mapper;
 
-use GoFish\Application\ENFramework\Mappers\DBConnectionMapper;
+use GoFish\Application\ENFramework\Models\IDatabaseConnection;
 
-class CaughtFishMapper extends DBConnectionMapper
+class CaughtFishMapper
 {
+    /**
+     * @var \GoFish\Application\ENFramework\Models\IDatabaseConnection
+     */
+    private $databaseConnection;
+
     private $getIndexSQL = 'SELECT
         caught_fish.id,
         fish_id,
@@ -41,6 +46,10 @@ class CaughtFishMapper extends DBConnectionMapper
           )
     ';
 
+    public function __construct(IDatabaseConnection $databaseConnection){
+        $this->databaseConnection = $databaseConnection;
+    }
+
     private function getIndexSQL()
     {
         return $this->getIndexSQL;
@@ -48,13 +57,13 @@ class CaughtFishMapper extends DBConnectionMapper
 
     public function index($params)
     {
-        $caughtFishes = $this->runQuery($this->getIndexSQL(), $params);
+        $caughtFishes = $this->databaseConnection->runQuery($this->getIndexSQL(), $params);
         return $caughtFishes;
     }
 
     public function create($params)
     {
-        $result = $this->runQuery($this->create, $params);
+        $result = $this->databaseConnection->runQuery($this->create, $params);
         return $result;
     }
 }
