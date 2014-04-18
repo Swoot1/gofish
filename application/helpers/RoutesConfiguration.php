@@ -20,4 +20,9 @@ $routes[] = array(
     'controller' => 'UserController'
 );
 
+$routes[] = array(
+    'resource' => 'sessions',
+    'controller' => 'SessionController'
+);
+
 return new \GoFish\Application\Helpers\RouteCollection($routes);

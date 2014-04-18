@@ -15,9 +15,13 @@ use GoFish\Application\ENFramework\Models\GeneralModel;
 class User extends GeneralModel{
 
     protected $id;
-    protected $name;
+    protected $username;
+    protected $email;
+    protected $password;
 
     protected function setUpValidation(){
-        $this->setValidation(new PropertyValidationCollection(array())); // TODO
+
+        // TODO autoloader isn't working here.
+        $this->setValidation(new PropertyValidationCollection(array()));
     }
 } 

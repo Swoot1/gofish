@@ -9,11 +9,20 @@
 namespace Tests\ModelTests;
 
 
+use GoFish\Application\Controllers\UserController;
+use GoFish\Application\Models\User;
+
 class UserTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testTrue()
+    public function testPasswordHash()
     {
-        $this->markTestSkipped('Implement');
+        $data = array(
+            'username' => 'Swoot',
+            'email' => 'mymail@mail.com',
+            'password' => 'Sommar123'
+        );
+
+
     }
 } 

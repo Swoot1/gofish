@@ -14,9 +14,14 @@ class Configuration {
 
     public function setUpConfiguration(){
         $this->setIncludePath();
+        $this->setSessionSavePath();
     }
 
     private function setIncludePath(){
         set_include_path('C:/Users/Elin/repos/');
+    }
+
+    private function setSessionSavePath(){
+        ini_set('session.save_path', 'tmp');
     }
 }

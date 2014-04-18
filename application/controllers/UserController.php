@@ -15,6 +15,9 @@ use GoFish\Application\Services\UserService;
 
 class UserController {
 
+    /**
+     * @var GoFish\Application\Services\UserService
+     */
     private $userService;
 
     public function __construct()

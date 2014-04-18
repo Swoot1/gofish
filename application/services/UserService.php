@@ -10,6 +10,7 @@ namespace GoFish\Application\Services;
 
 
 use GoFish\Application\Collections\UserCollection;
+use GoFish\Application\ENFramework\Models\PassWordHash;
 use GoFish\Application\Mappers\UserMapper;
 use GoFish\Application\Models\User;
 
@@ -49,11 +50,18 @@ class UserService {
 
     public function create(array $data)
     {
+        $data = $this->hashPassword($data);
         $userModel = new User($data);
         $userMapper = $this->getUserMapper();
         $DBParameters = $userModel->getDBParameters();
         $result = $userMapper->create($DBParameters);
         return $userModel;
+    }
+
+    private function hashPassword(array $data){
+        $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+
+        return $data;
     }
 
     public function read($id){

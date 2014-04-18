@@ -21,12 +21,35 @@ $route = $routeCollection->getRoute($requestModel);
 if ($route) {
     $result = $route->callMethod($requestModel);
     $result = json_encode($result ? $result->toArray() : array(), JSON_UNESCAPED_UNICODE);
-}else{
-    $result = array();
+    header('Content-Type: Application/json; charset=utf-8');
+    echo $result;
+} else {
+    $html = '<!DOCTYPE html>
+                <html ng-app>
+                    <head>
+                        <title>Ojas fiskeri</title>
+                        <meta charset="utf-8"/>
+                        <div id="content">
+                        <div ng-controller="FishController">
+                        <form>
+                        <ul ng-repeat="fish in fishes">
+                            <li>{{fish.name}}</li>
+                        </ul>
+                        <input id="fish" ng-model="fish.name" ng-model-instant type="text" placeholder="Name of the fish"/>
+                        <button ng-click="addFish()">Add</button>
+                        {{fish.model}}
+                        </div>
+                        </div>
+                    </head>
+                    <script type="text/javascript" src="Application/Public/Scripts/FishController.js"></script>
+                    <script type="text/javascript" src="Application/Public/Scripts/angular.js"></script>
+                    <body>
+                    </body>
+                </html>';
+    echo $html;
+    $result = json_encode(array());
 }
 
-header('Content-Type: Application/json; charset=utf-8');
-echo $result;
 
 
 
@@ -65,27 +88,6 @@ echo $result;
 
 
 
-//    $html = '<!DOCTYPE html>
-//<html>
-//<head>
-//	<title>Ojas fiskeri</title>
-//	<meta charset="utf-8"/>
-//	<script src="scripts/javascript.js" type="text/javascript"></script>
-//	<div id="content">
-//	<form>
-//    <input id="fisher" type="text" placeholder="Storfiskarns namn"/>
-//    <select id="fish">
-//        <option value="1">Gädda</option>
-//        <option value="2">Mört</option>
-//    </select>
-//    <input id="weight" type="text" placeholder="Hur möe vägde han?"/>
-//    <input id="measurement" type="text" placeholder="Hur lång va han?"/>
-//    <button class="js-submit-catch">Skrytknapp</button>
-//
-//	</div>
-//</head>
-//<body>
-//</body>
-//</html>';
-//    echo $html;
+
+
 

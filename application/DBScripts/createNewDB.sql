@@ -8,7 +8,9 @@ $conn->exec($sql);
 // Create user table
 $sql = 'CREATE TABLE IF NOT EXISTS user(
     id INTEGER PRIMARY KEY,
-    name VARCHAR(50) NOT NULL UNIQUE
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    password CHAR(60) NOT NULL
 )';
 $conn->exec($sql);
 

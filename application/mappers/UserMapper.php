@@ -19,7 +19,8 @@ class UserMapper {
     private $indexSQL = '
     SELECT
        id,
-       name
+       username,
+       email
     FROM
       user';
 
@@ -27,18 +28,23 @@ class UserMapper {
        INSERT INTO
         user
           (
-          name
+          username,
+          email,
+          password
           )
       VALUES
         (
-          :name
+          :username,
+          :email,
+          :password
         )
     ';
 
     private $readSQL = '
     SELECT
        id,
-       name
+       username,
+       email
     FROM
       user
     WHERE
@@ -48,7 +54,8 @@ class UserMapper {
        UPDATE
            user
         SET
-          name = :name
+          username = :username,
+          email = :email
         WHERE
           id = :id
     ';
