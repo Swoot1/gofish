@@ -9,16 +9,21 @@
 
 namespace GoFish\Application\Controllers;
 
+use GoFish\Application\ENFramework\Models\DatabaseConnection;
 use GoFish\Mapper\CaughtFishMapper;
 use GoFish\Service\CaughtFishService;
 
 class CaughtFishController
 {
+    /**
+     * @var GoFish\Application\Services\CaughtFishService
+     */
     private $caughtFishService;
 
     public function __construct()
     {
-        $caughtFishMapper = new CaughtFishMapper();
+        $databaseConnection = new DatabaseConnection();
+        $caughtFishMapper = new CaughtFishMapper($databaseConnection);
         $caughtFishService = new CaughtFishService($caughtFishMapper);
         $this->setCaughtFishService($caughtFishService);
     }
