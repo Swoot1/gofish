@@ -11,7 +11,7 @@
 $routes = array();
 
 $routes[] = array(
-    'resource' => 'fishes',
+    'resource' => 'fish',
     'controller' => 'FishController'
 );
 
@@ -23,6 +23,11 @@ $routes[] = array(
 $routes[] = array(
     'resource' => 'sessions',
     'controller' => 'SessionController'
+);
+
+$routes[] = array(
+    'resource' => 'caughtfish',
+    'controller' => 'CaughtFishController'
 );
 
 return new \GoFish\Application\Helpers\RouteCollection($routes);

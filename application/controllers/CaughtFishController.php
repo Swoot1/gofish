@@ -10,13 +10,13 @@
 namespace GoFish\Application\Controllers;
 
 use GoFish\Application\ENFramework\Models\DatabaseConnection;
-use GoFish\Mapper\CaughtFishMapper;
-use GoFish\Service\CaughtFishService;
+use GoFish\Application\Mappers\CaughtFishMapper;
+use GoFish\Application\Services\CaughtFishService;
 
 class CaughtFishController
 {
     /**
-     * @var GoFish\Application\Services\CaughtFishService
+     * @var \GoFish\Application\Services\CaughtFishService
      */
     private $caughtFishService;
 

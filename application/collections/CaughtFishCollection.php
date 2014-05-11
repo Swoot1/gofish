@@ -13,10 +13,6 @@ use GoFish\Application\ENFramework\Collections\GeneralCollection;
 
 class CaughtFishCollection extends GeneralCollection
 {
-    private $data;
-
-    public function __construct(array $data)
-    {
-        $this->data = $data;
-    }
+    protected $data;
+    protected $model = 'GoFish\Application\Models\CaughtFish';
 }

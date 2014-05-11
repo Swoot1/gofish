@@ -7,12 +7,12 @@
  * To change this template use File | Settings | File Templates.
  */
 
-namespace GoFish\Service;
+namespace GoFish\Application\Services;
 
 
-use GoFish\Collection\CaughtFishCollection;
-use GoFish\Mapper\CaughtFishMapper;
-use GoFish\Model\CaughtFish;
+use GoFish\Application\Collections\CaughtFishCollection;
+use GoFish\Application\Mappers\CaughtFishMapper;
+use GoFish\Application\Models\CaughtFish;
 
 class CaughtFishService
 {
@@ -44,29 +44,17 @@ class CaughtFishService
     public function index()
     {
         $caughtFishMapper = $this->getCaughtFishMapper();
-        $caughtFishesData = $caughtFishMapper->index(array());
+        $caughtFishData = $caughtFishMapper->index();
 
-        $caughtFishes = array_map($this->createCaughtFishModel, $caughtFishesData);
-
-        return new CaughtFishCollection($caughtFishes);
-    }
-
-    private function createCaughtFishModel($caughtFishesData) // TODO make the collection do this.
-    {
-        $caughtFishes = array();
-
-        foreach ($caughtFishesData as $caughtFishData) {
-            $caughtFishes[] = new CaughtFish($caughtFishData);
-        }
-
-        return $caughtFishes;
+        return new CaughtFishCollection($caughtFishData);
     }
 
     public function create(array $data)
     {
         $caughtFishModel = new CaughtFish($data);
-        $caughtFishDBParams = $caughtFishModel->getDBParams();
-        $this->getCaughtFishMapper($caughtFishDBParams);
+        $caughtFishDBParams = $caughtFishModel->getDBParameters();
+        $caughtFishMapper = $this->getCaughtFishMapper();
+        $caughtFishMapper->create($caughtFishDBParams);
         return $caughtFishModel;
 
     }

@@ -16,7 +16,7 @@ use GoFish\Application\Services\FishService;
 class FishController
 {
     /**
-     * @var GoFish\Application\Services\FishService
+     * @var \GoFish\Application\Services\FishService
      */
     private $fishService;
 
@@ -34,7 +34,7 @@ class FishController
     }
 
     /**
-     * @return GoFish\Application\Services\FishService
+     * @return \GoFish\Application\Services\FishService
      */
     private function getFishService()
     {
