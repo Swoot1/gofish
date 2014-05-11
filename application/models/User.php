@@ -8,20 +8,19 @@
 
 namespace GoFish\Application\Models;
 
-
-use GoFish\Application\Collections\PropertyValidationCollection;
+use GoFish\Application\ENFramework\Collections\PropertyValidationCollection;
 use GoFish\Application\ENFramework\Models\GeneralModel;
 
-class User extends GeneralModel{
+class User extends GeneralModel
+{
 
     protected $id;
     protected $username;
     protected $email;
     protected $password;
 
-    protected function setUpValidation(){
-
-        // TODO autoloader isn't working here.
+    protected function setUpValidation()
+    {
         $this->setValidation(new PropertyValidationCollection(array()));
     }
 } 
