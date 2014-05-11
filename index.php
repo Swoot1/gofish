@@ -4,7 +4,7 @@ require_once 'Application/Helpers/Autoloader.php';
 require_once 'Application/Helpers/Configuration.php';
 
 putenv('TMP=C:/temp');
-
+//http://richardmiller.co.uk/2011/07/07/dependency-injection-moving-from-basics-to-container/
 $configuration = new \GoFish\Application\Helpers\Configuration();
 $configuration->setUpConfiguration();
 
@@ -24,29 +24,7 @@ if ($route) {
     header('Content-Type: Application/json; charset=utf-8');
     echo $result;
 } else {
-    $html = '<!DOCTYPE html>
-                <html ng-app>
-                    <head>
-                        <title>Ojas fiskeri</title>
-                        <meta charset="utf-8"/>
-                        <div id="content">
-                        <div ng-controller="FishController">
-                        <form>
-                        <ul ng-repeat="fish in fishes">
-                            <li>{{fish.name}}</li>
-                        </ul>
-                        <input id="fish" ng-model="fish.name" ng-model-instant type="text" placeholder="Name of the fish"/>
-                        <button ng-click="addFish()">Add</button>
-                        {{fish.model}}
-                        </div>
-                        </div>
-                    </head>
-                    <script type="text/javascript" src="Application/Public/Scripts/FishController.js"></script>
-                    <script type="text/javascript" src="Application/Public/Scripts/angular.js"></script>
-                    <body>
-                    </body>
-                </html>';
-    echo $html;
+    include 'GoFish\Application\Templates\indexHTML.php';
     $result = json_encode(array());
 }
 
