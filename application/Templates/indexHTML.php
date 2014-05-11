@@ -20,19 +20,18 @@ echo '<!DOCTYPE html>
         <form>
             <div class="row">
                 <div class="large-12 columns">
-                    <ul ng-repeat="fish in fishes">
-                        <li><p>{{fish.name}}</p></li>
-                    </ul>
+                    <input id="fish" ng-model="fish.name" ng-model-instant type="text" placeholder="Fiskens förnamn"/>
+                    <button type="button" ng-click="addFish()">Add</button>
                 </div>
             </div>
-            <div class="row">
-                <div class="large-12 columns">
-                    <input id="fish" ng-model="fish.name" ng-model-instant type="text" placeholder="Name of the fish"/>
-                    <button ng-click="addFish()">Add</button>
-                </div>
-            </div>
-            {{fish.model}}
         </form>
+        <div class="row">
+            <div class="large-12 columns">
+                <ul ng-repeat="fish in fishes">
+                    <li><p>{{fish.name}}  <input type="button" ng-click="deleteFish(fish)"class="button alert tiny" value="Ta bort fisk"/></p></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="Application/Public/Scripts/FishController.js"></script>
