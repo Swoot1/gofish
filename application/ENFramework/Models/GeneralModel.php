@@ -9,8 +9,7 @@
 
 namespace GoFish\Application\ENFramework\Models;
 
-
-use GoFish\Application\Collections\PropertyValidationCollection;
+use GoFish\Application\ENFramework\Collections\PropertyValidationCollection;
 
 abstract class GeneralModel
 {
