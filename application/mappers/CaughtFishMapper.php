@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-namespace GoFish\Mapper;
+namespace GoFish\Application\Mappers;
 
 use GoFish\Application\ENFramework\Models\IDatabaseConnection;
 
@@ -19,14 +19,12 @@ class CaughtFishMapper
     private $databaseConnection;
 
     private $getIndexSQL = 'SELECT
-        caught_fish.id,
-        fish_id,
-        user_id,
+        caught_fish.id AS id,
+        fish_id AS fishId,
+        user_id AS userId,
         weight,
-        measurement,
-        fish.name
-        FROM caught_fish
-        INNER JOIN fish ON caught_fish.id = fish.id';
+        measurement
+        FROM caught_fish';
 
     private $create = '
        INSERT INTO
@@ -46,7 +44,8 @@ class CaughtFishMapper
           )
     ';
 
-    public function __construct(IDatabaseConnection $databaseConnection){
+    public function __construct(IDatabaseConnection $databaseConnection)
+    {
         $this->databaseConnection = $databaseConnection;
     }
 
@@ -55,14 +54,16 @@ class CaughtFishMapper
         return $this->getIndexSQL;
     }
 
-    public function index($params)
+    public function index()
     {
-        $caughtFishes = $this->databaseConnection->runQuery($this->getIndexSQL(), $params);
-        return $caughtFishes;
+        $caughtFishData = $this->databaseConnection->runQuery($this->getIndexSQL());
+        return $caughtFishData;
     }
 
     public function create($params)
     {
+        unset($params['id']);
+        unset($params['fishName']); // TODO
         $result = $this->databaseConnection->runQuery($this->create, $params);
         return $result;
     }
