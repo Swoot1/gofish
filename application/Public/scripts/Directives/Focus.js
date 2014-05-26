@@ -8,12 +8,7 @@ goFish.directive('ngFocus', [function () {
         require: 'ngModel',
         link: function (scope, element, attrs, ctrl) {
             ctrl.$focused = false;
-            element.bind('focus',function () {
-                element.addClass(FOCUS_CLASS);
-                scope.$apply(function () {
-                    ctrl.$focused = true;
-                });
-            }).bind('blur', function () {
+            element.bind('blur', function () {
                 element.removeClass(FOCUS_CLASS);
                 scope.$apply(function () {
                     ctrl.$focused = false;

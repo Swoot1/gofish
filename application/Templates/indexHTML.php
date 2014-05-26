@@ -18,12 +18,12 @@ echo '<!DOCTYPE html>
                 <h1>Lägg till fångst</h1>
                 <form name="caught_fish_form" ng-submit="createCaughtFish">
                     <input name="fisherId" type="text" ng-model="caughtFish.userId" placeholder="Fiskarens id" ng-focus/>
-                    <input name="weight" type="number" type="number" ng-model="caughtFish.weight" ng-minlength=1 min="1" max="10" required novalidate placeholder="Vikt" ng-focus/>
-                    <div class="error" ng-show="caught_fish_form.$dirty && caught_fish_form.$invalid && !caught_fish_form.weight.$focused">
+                    <div class="error" ng-show="caught_fish_form.weight.$dirty && caught_fish_form.$invalid && !caught_fish_form.weight.$focused">
                         <small class="error" ng-show="caught_fish_form.weight.$error.required">
                             Hörredu! Vikt krävs!!
                         </small>
                     </div>
+                    <input name="weight" type="number" type="number" ng-model="caughtFish.weight" ng-minlength=1 min="1" max="10" required novalidate placeholder="Vikt" ng-focus/>
                     <input name="measurement" type="number" ng-model="caughtFish.measurement" ng-minlength=1 min="1" max="10" required novalidate placeholder="Längd" ng-focus/>
                     <select name="fishId" ng-model="caughtFish.fishId" required novalidate>
                         <option ng:repeat="fish in fishCollection" value="{{fish.id}}">{{fish.name}}</option>
@@ -50,7 +50,7 @@ echo '<!DOCTYPE html>
         <form name="fish_form">
             <div class="row">
                 <div class="large-12 columns">
-                    <div class="error" ng-show="fish_form.$dirty && fish_form.$invalid">
+                    <div class="error" ng-show="fish_form.name.$dirty && fish_form.$invalid">
                         <small class="error" ng-show="fish_form.$error.unique">
                                 WOoow! Den fisken finns redan!
                         </small>
