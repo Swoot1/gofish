@@ -2,43 +2,47 @@
  * Created by Elin on 2014-04-18.
  */
 
-goFish.controller('FishController', ['$scope', '$http', '$filter', function ($scope, $http) {
+goFish.controller('FishController', ['$scope', '$filter', '$resource', function ($scope, $filter, $resource) {
 
-    $http.get('/fish').success(function (result) {
-        $scope.fishCollection = result;
-    });
+    var FishResource = $resource('/fish/:id');
+    var CaughtFishResource = $resource('/caughtfish');
 
-    $http.get('/caughtfish').success(function (result) {
-        $scope.caughtFishCollection = result;
-    });
+    $scope.fishCollection = FishResource.query();
+    $scope.caughtFishCollection = CaughtFishResource.query();
+
     $scope.addFish = function () {
-        $http.post('/fish', $scope.fish).success(function (data) {
+        var newFish = new FishResource($scope.fish);
+
+        newFish.$save({}, function (data) {
             alert('Sparat fisk!');
             $scope.fishCollection.push(data);
-        }).error(function () {
+        }, function () {
             alert('Något gick snett.');
         });
     };
 
     $scope.deleteFish = function (fish) {
         var indexOfFish;
+        var fishResource = new FishResource(fish);
+        fishResource.$delete({id: fish.id},
+            function () {
+                alert('Fisk borttagen.');
+                indexOfFish = $scope.fishCollection.indexOf(fish);
+                $scope.fishCollection.splice(indexOfFish, 1);
+            },
+            function () {
+                alert('Något gick snett.');
+            });
+    };
 
-        $http.delete('fish/' + fish.id).success(function () {
-            alert('Fisk borttagen.');
-            indexOfFish = $scope.fishCollection.indexOf(fish);
-            $scope.fishCollection.splice(indexOfFish, 1);
-
-        }).error(function () {
+    $scope.createCaughtFish = function () {
+        var newCaughtFishResource = new CaughtFishResource($scope.caughtFish);
+        newCaughtFishResource.$save({}, function () {
+            alert('Lagt till fångst.');
+            $scope.caughtFishCollection.push($scope.caughtFish);
+        }, function () {
             alert('Något gick snett.');
         });
     };
 
-    $scope.createCaughtFish = function () {
-        $http.post('/caughtfish', $scope.caughtFish).success(function () {
-            alert('Lagt till fångst.');
-            $scope.caughtFishCollection.push($scope.caughtFish);
-        }).error(function () {
-            alert('Något gick snett.');
-        });
-    }
 }]);
