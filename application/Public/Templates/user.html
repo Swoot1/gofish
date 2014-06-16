@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="large-12 columns">
+        <h2>Skapa ny användare</h2>
+
+        <form name="user_form" ng-submit="createUser()">
+            <label for="username">Namn</label>
+            <input ng-model="user.username" name="username" type="text"/>
+
+            <label for="email">E-post</label>
+            <input ng-model="user.email" name="email" type="email"/>
+
+            <label for="password">Lösenord</label>
+            <input ng-model="user.password" name="password" type="password"/>
+            <button type="submit">Spara användare</button>
+        </form>
+    </div>
+</div>
