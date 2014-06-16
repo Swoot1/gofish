@@ -16,7 +16,7 @@ $routes[] = array(
 );
 
 $routes[] = array(
-    'resource' => 'users',
+    'resource' => 'user',
     'controller' => 'UserController'
 );
 

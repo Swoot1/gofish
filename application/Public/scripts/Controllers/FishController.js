@@ -3,12 +3,8 @@
  */
 
 goFish.controller('FishController', ['$scope', '$filter', '$resource', function ($scope, $filter, $resource) {
-
     var FishResource = $resource('/fish/:id');
-    var CaughtFishResource = $resource('/caughtfish');
-
     $scope.fishCollection = FishResource.query();
-    $scope.caughtFishCollection = CaughtFishResource.query();
 
     $scope.addFish = function () {
         var newFish = new FishResource($scope.fish);
@@ -34,15 +30,4 @@ goFish.controller('FishController', ['$scope', '$filter', '$resource', function 
                 alert('Något gick snett.');
             });
     };
-
-    $scope.createCaughtFish = function () {
-        var newCaughtFishResource = new CaughtFishResource($scope.caughtFish);
-        newCaughtFishResource.$save({}, function () {
-            alert('Lagt till fångst.');
-            $scope.caughtFishCollection.push($scope.caughtFish);
-        }, function () {
-            alert('Något gick snett.');
-        });
-    };
-
 }]);

@@ -47,6 +47,6 @@ class CaughtFishController
     public function create(array $data)
     {
         $caughtFishService = $this->getCaughtFishService();
-        $caughtFishService->create($data);
+        return $caughtFishService->create($data);
     }
 }
