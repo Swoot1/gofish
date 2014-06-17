@@ -16,6 +16,7 @@ class Route
 {
     protected $resource;
     protected $controller;
+    protected $requiresAuthorization = true;
     // allowed request methods
 
     public function __construct(array $data){

@@ -9,7 +9,10 @@
 namespace GoFish\Application\Services;
 
 
-class SessionService {
+use GoFish\Application\Helpers\SessionManager;
+use GoFish\Application\Models\Login;
+
+class LoginService {
 
     private $userService;
 
@@ -18,8 +21,7 @@ class SessionService {
     }
 
     public function create($data){
-        session_start();
-        session_id(1);
-//        $user = $this->userService->read($data['userId']);
+        SessionManager::startSession('User');
+        return new Login(array('isLoggedIn' => true));
     }
 } 

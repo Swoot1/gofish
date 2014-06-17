@@ -24,5 +24,12 @@ var goFish = angular.module('GoFish', ['ngResource', 'filters', 'ngRoute'])
             .when('/user', {
                 templateUrl: 'application/public/Templates/userlist.html',
                 controller: 'UserListController'
+            })
+            .when('/login', {
+                templateUrl: 'application/public/Templates/login.html',
+                controller: 'LoginController'
+            })
+            .otherwise({
+                redirectTo: '/login'
             });
     }]);

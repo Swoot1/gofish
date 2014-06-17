@@ -4,8 +4,6 @@
 goFish.controller('UserController', ['$scope', '$resource', '$routeParams', function ($scope, $resource, $routeParams) {
     var UserResource = $resource('user/:id');
 
-    debugger;
-
     if($routeParams.id){
         $scope.user = UserResource.get({id : $routeParams.id});
     }

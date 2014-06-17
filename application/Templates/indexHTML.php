@@ -25,5 +25,6 @@ echo '<!DOCTYPE html>
 <script type="text/javascript" src="Application/Public/Scripts/Controllers/CaughtFishController.js"></script>
 <script type="text/javascript" src="Application/Public/Scripts/Controllers/UserController.js"></script>
 <script type="text/javascript" src="Application/Public/Scripts/Controllers/UserListController.js"></script>
+<script type="text/javascript" src="Application/Public/Scripts/Controllers/LoginController.js"></script>
 </body>
 </html>';
