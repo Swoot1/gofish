@@ -14,7 +14,8 @@ use GoFish\Application\ENFramework\Models\PassWordHash;
 use GoFish\Application\Mappers\UserMapper;
 use GoFish\Application\Models\User;
 
-class UserService {
+class UserService
+{
     private $userMapper;
 
     public function __construct(UserMapper $userMapper)
@@ -58,25 +59,36 @@ class UserService {
         return $userModel;
     }
 
-    private function hashPassword(array $data){
+    private function hashPassword(array $data)
+    {
         $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
 
         return $data;
     }
 
-    public function read($id){
+    public function read($id)
+    {
         $userMapper = $this->getUserMapper();
         $userData = $userMapper->read($id);
 
         return $userData ? new User($userData) : null;
     }
 
-    public function update($id, $requestData){
+    public function getUserByEmail($email)
+    {
+        $userMapper = $this->getUserMapper();
+        $userData = $userMapper->getUserByEmail($email);
+        return $userData = $userData ? new User($userData) : null;
+    }
+
+    public
+    function update($id, $requestData)
+    {
         $userMapper = $this->getUserMapper();
 
         $savedUser = $this->read($id);
 
-        if($savedUser == null){
+        if ($savedUser == null) {
             throw new \Exception('implement me');
         }
 
@@ -86,7 +98,9 @@ class UserService {
         return $requestData ? new User($requestData) : null;
     }
 
-    public function delete($id){
+    public
+    function delete($id)
+    {
         $userMapper = $this->getUserMapper();
         $userMapper->delete($id);
     }

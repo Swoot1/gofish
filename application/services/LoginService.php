@@ -9,19 +9,31 @@
 namespace GoFish\Application\Services;
 
 
+use GoFish\Application\Helpers\exceptionHandlers\ApplicationException;
 use GoFish\Application\Helpers\SessionManager;
 use GoFish\Application\Models\Login;
 
-class LoginService {
+class LoginService
+{
 
     private $userService;
 
-    public function __construct(UserService $userService){
+    public function __construct(UserService $userService)
+    {
         $this->userService = $userService;
     }
 
-    public function create($data){
-        SessionManager::startSession('User');
+    public function create($data)
+    {
+        $user = $this->userService->getUserByEmail($data['email']);
+        $invalidLogin = $user === null || $user->isValidPassword($data['password']) == false;
+
+        if ($invalidLogin) {
+            throw new ApplicationException('Fel e-postadress eller användarnamn.');
+        } else {
+            SessionManager::startSession('User');
+        }
+
         return new Login(array('isLoggedIn' => true));
     }
 } 

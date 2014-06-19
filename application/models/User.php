@@ -23,4 +23,12 @@ class User extends GeneralModel
     {
         $this->setValidation(new PropertyValidationCollection(array()));
     }
+
+    /**
+     * @param $password
+     * @return bool
+     */
+    public function isValidPassword($password){
+        return password_verify($password, $this->password);
+    }
 } 
