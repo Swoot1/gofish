@@ -26,33 +26,23 @@ class DITest
     public function getController()
     {
         $route = $this->request->getRequestURI();
-        return $this->getResourceFromXML(array('route' => $route));
+        return $this->getClassFromXML(array('route' => $route));
     }
 
     /**
-     * Gets the first resource as a reflection class that matches the attributes
+     * Gets the first resource as a reflection class that matches the associated array $attributes
      * param.
      * @param array $attributes
      * @return null|object
      * @throws exceptionHandlers\ApplicationException
      */
-    private function getResourceFromXML(array $attributes)
+    private function getClassFromXML(array $attributes)
     {
-        $attributesQuery = $this->getAttributesQuery($attributes);
-        $dependencies = array();
-        $matchingResource = array_shift($this->dependencyInjectionXML->xpath('dependencies/dependency' . $attributesQuery));
+        $matchingResource = $this->getMatchingResourceFromXML($attributes);
+
         if ($matchingResource) {
-
-            foreach ($matchingResource->dependencies->dependency as $dependency) {
-                $dependencyClass = $this->getResourceFromXML(array('id' => (string)$dependency['id'], 'class' => (string)$dependency['class']));
-
-                if ($dependencyClass == null) {
-                    throw new ApplicationException('Hittade inte dependency.');
-                }
-                $dependencies[] = $dependencyClass;
-            }
-
-            $result = $this->getClassInstanceFromXML($matchingResource, $dependencies);
+            $classDependencies = $this->getClassDependencies($matchingResource);
+            $result = $this->createClassInstanceFromXML($matchingResource, $classDependencies);
 
         } else {
             $result = null;
@@ -63,12 +53,49 @@ class DITest
     }
 
     /**
+     * Returns an array of the dependencies needing for creating the class
+     * from matchingResource.
+     * @param \SimpleXMLElement $matchingResource
+     * @return array
+     * @throws exceptionHandlers\ApplicationException
+     */
+    private function getClassDependencies(\SimpleXMLElement $matchingResource)
+    {
+        $dependencies = array();
+
+        foreach ($matchingResource->dependencies->dependency as $dependency) {
+            $dependencyClass = $this->getClassFromXML(array('id' => (string)$dependency['id'], 'class' => (string)$dependency['class']));
+
+            if ($dependencyClass == null) {
+                throw new ApplicationException('Hittade inte dependency.');
+            }
+
+            $dependencies[] = $dependencyClass;
+        }
+
+        return $dependencies;
+    }
+
+    /**
+     * Queries the xml for a dependency element with the corresponding
+     * attributes and returns the first match.
+     * @param array $attributes
+     * @return mixed
+     */
+    private function getMatchingResourceFromXML(array $attributes)
+    {
+        $attributesQuery = $this->getAttributesQuery($attributes);
+        $matchingResources = $this->dependencyInjectionXML->xpath('dependencies/dependency' . $attributesQuery);
+        return array_shift($matchingResources);
+    }
+
+    /**
      * Returns a reflection class of the class corresponding to the simpleXMLElement.
      * @param \SimpleXMLElement $matchingResource
      * @param array $dependencies
      * @return object
      */
-    private function getClassInstanceFromXML(\SimpleXMLElement $matchingResource, array $dependencies)
+    private function createClassInstanceFromXML(\SimpleXMLElement $matchingResource, array $dependencies)
     {
         $className = sprintf('%s\%s', (string)$matchingResource->attributes()->class, (string)$matchingResource->attributes()->id);
         $reflectionClass = new \ReflectionClass($className);
