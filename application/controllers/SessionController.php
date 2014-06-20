@@ -10,40 +10,33 @@ namespace GoFish\Application\Controllers;
 
 use GoFish\Application\ENFramework\Models\DatabaseConnection;
 use GoFish\Application\Mappers\UserMapper;
-use GoFish\Application\Services\LoginService;
 use GoFish\Application\Services\SessionService;
 use GoFish\Application\Services\UserService;
 
-class LoginController {
+class SessionController
+{
 
 
     /**
-     * @var GoFish\Application\Services\LoginService
+     * @var \GoFish\Application\Services\SessionService
      */
-    private $loginService;
+    private $sessionService;
 
     public function __construct()
     {
         $databaseConnection = new DatabaseConnection();
         $userMapper = new UserMapper($databaseConnection);
         $userService = new UserService($userMapper);
-        $loginService = new LoginService($userService);
-        $this->setLoginService($loginService);
+        $this->sessionService = new SessionService($userService);
     }
 
-    private function setLoginService($loginService)
+    public function create(array $data)
     {
-        $this->loginService = $loginService;
+        return $this->sessionService->create($data);
     }
 
-
-    private function getLoginService()
+    public function delete()
     {
-        return $this->loginService;
-    }
-
-    public function create(array $data){
-        $loginService = $this->getLoginService();
-        return $loginService->create($data);
+        return $this->sessionService->delete();
     }
 } 

@@ -14,6 +14,14 @@ $autoLoader->setUpAutoLoader();
 $requestDispatcher = new \GoFish\Application\Helpers\RequestDispatcher();
 $requestModel = $requestDispatcher->getRequestModel();
 
+
+$DIXML = simplexml_load_file('Application/Helpers/dependencyinjection.xml');
+
+if($requestModel->getRequestURI()){
+    $DItest = new \GoFish\Application\Helpers\DITest($requestModel, $DIXML);
+    $controller = $DItest->getController(); // TODO use this instead of the controller creator in getRoute
+}
+
 $routeCollection = include_once 'Application/Helpers/RoutesConfiguration.php';
 
 $route = $routeCollection->getRoute($requestModel);

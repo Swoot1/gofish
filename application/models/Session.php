@@ -13,20 +13,20 @@ use GoFish\Application\ENFramework\Collections\PropertyValidationCollection;
 use GoFish\Application\ENFramework\Models\GeneralModel;
 use GoFish\Application\Helpers\PropertyValidation;
 
-class Login extends GeneralModel
+class Session extends GeneralModel
 {
     protected $isLoggedIn = false;
 
 
     protected function setUpValidation()
     {
-       $this->setValidation(new PropertyValidationCollection(array(
-           new PropertyValidation(array(
-                   'dataType' => 'boolean',
-                   'genericName' => 'Inloggad-flagga',
-                   'propertyName' => 'isLoggedIn'
-               )
-           )
-       )));
+        $this->setValidation(new PropertyValidationCollection(array(
+            new PropertyValidation(array(
+                    'dataType' => 'boolean',
+                    'genericName' => 'Inloggad-flagga',
+                    'propertyName' => 'isLoggedIn'
+                )
+            )
+        )));
     }
 }

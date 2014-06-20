@@ -38,11 +38,6 @@ class Route
 
     public function isMatchingRoute($stringToMatch)
     {
-        return $this->matchURLString($stringToMatch);
-    }
-
-    private function matchURLString($stringToMatch)
-    {
         return strpos($stringToMatch, $this->getResource()) === 0; // TODO fix this can match fishparty/1 when the user want to go to fish.
     }
 

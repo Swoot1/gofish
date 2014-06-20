@@ -11,9 +11,9 @@ namespace GoFish\Application\Services;
 
 use GoFish\Application\Helpers\exceptionHandlers\ApplicationException;
 use GoFish\Application\Helpers\SessionManager;
-use GoFish\Application\Models\Login;
+use GoFish\Application\Models\Session;
 
-class LoginService
+class SessionService
 {
 
     private $userService;
@@ -34,6 +34,11 @@ class LoginService
             SessionManager::startSession('User');
         }
 
-        return new Login(array('isLoggedIn' => true));
+        return new Session(array('isLoggedIn' => true));
+    }
+
+    public function delete()
+    {
+        SessionManager::endSession();
     }
 } 

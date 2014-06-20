@@ -16,6 +16,9 @@ use GoFish\Application\ENFramework\Models\Request;
 class RequestBuilder
 {
     private $buildSource;
+    /**
+     * @var \GoFish\Application\ENFramework\Models\Request
+     */
     private $requestModel;
 
     public function __construct(array $buildSource, RequestMethodCollection $requestMethodCollection)

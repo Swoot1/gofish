@@ -27,7 +27,7 @@ var goFish = angular.module('GoFish', ['ngResource', 'filters', 'ngRoute'])
             })
             .when('/login', {
                 templateUrl: 'application/public/Templates/login.html',
-                controller: 'LoginController'
+                controller: 'SessionController'
             })
             .otherwise({
                 redirectTo: '/login'

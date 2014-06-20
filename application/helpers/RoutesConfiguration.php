@@ -7,7 +7,6 @@
  * To change this template use File | Settings | File Templates.
  */
 
-
 $routes = array();
 
 $routes[] = array(
@@ -21,8 +20,8 @@ $routes[] = array(
 );
 
 $routes[] = array(
-    'resource' => 'login',
-    'controller' => 'LoginController',
+    'resource' => 'session',
+    'controller' => 'SessionController',
     'requiresAuthorization' => false
 );
 

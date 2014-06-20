@@ -12,7 +12,11 @@ echo '<!DOCTYPE html>
 </head>
 <body>
 <div id="content">
-    <div ng-view></div>
+    <div ng-controller="SessionController">
+        <span logoutbutton>Should be a button</span>
+    </div>
+    <div ng-view>
+    </div>
 </div>
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.js"></script>
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-resource.js"></script>
@@ -25,6 +29,8 @@ echo '<!DOCTYPE html>
 <script type="text/javascript" src="Application/Public/Scripts/Controllers/CaughtFishController.js"></script>
 <script type="text/javascript" src="Application/Public/Scripts/Controllers/UserController.js"></script>
 <script type="text/javascript" src="Application/Public/Scripts/Controllers/UserListController.js"></script>
-<script type="text/javascript" src="Application/Public/Scripts/Controllers/LoginController.js"></script>
+<script type="text/javascript" src="Application/Public/Scripts/Controllers/SessionController.js"></script>
+<script type="text/javascript" src="Application/Public/Scripts/Controllers/MenuController.js"></script>
+<script type="text/javascript" src="Application/Public/Scripts/Directives/LogOutButton.js"></script>
 </body>
 </html>';

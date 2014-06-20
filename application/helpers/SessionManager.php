@@ -57,17 +57,17 @@ class SessionManager
      */
     static protected function hasTheSessionVariablesChanged()
     {
-        $theSessionVariablesHasChanged = false;
+        $hasTheSessionVariablesChanged = false;
 
         if (isset($_SESSION['IPAddress']) && $_SESSION['IPAddress'] != $_SERVER['REMOTE_ADDR']) {
-            $theSessionVariablesHasChanged = true;
+            $hasTheSessionVariablesChanged = true;
         }
 
         if (isset($_SESSION['userAgent']) && $_SESSION['userAgent'] != $_SERVER['HTTP_USER_AGENT']) {
-            $theSessionVariablesHasChanged = true;
+            $hasTheSessionVariablesChanged = true;
         }
 
-        return $theSessionVariablesHasChanged;
+        return $hasTheSessionVariablesChanged;
     }
 
     /**

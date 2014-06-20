@@ -13,14 +13,15 @@ use GoFish\Application\ENFramework\Models\DatabaseConnection;
 use GoFish\Application\Mappers\UserMapper;
 use GoFish\Application\Services\UserService;
 
-class UserController {
+class UserController
+{
 
     /**
-     * @var GoFish\Application\Services\UserService
+     * @var \GoFish\Application\Services\UserService
      */
     private $userService;
 
-    public function __construct()
+    public function __construct(UserService $userService)
     {
         $databaseConnection = new DatabaseConnection();
         $userMapper = new UserMapper($databaseConnection);
@@ -65,6 +66,6 @@ class UserController {
     public function delete($id)
     {
         $userService = $this->getUserService();
-        return $userService->delete($id);
+        $userService->delete($id);
     }
 } 

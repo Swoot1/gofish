@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gofish>
+    <dependencies>
+        <dependency id="UserService" class="GoFish\Application\Services">
+            <dependencies>
+                <dependency id="UserMapper" class="GoFish\Application\Mappers">
+                </dependency>
+            </dependencies>
+        </dependency>
+        <dependency route="user" id="UserController" class="GoFish\Application\Controllers">
+            <dependencies>
+                <dependency id="UserService" class="GoFish\Application\Services">
+                </dependency>
+            </dependencies>
+        </dependency>
+        <dependency id="UserMapper" class="GoFish\Application\Mappers">
+            <dependencies>
+                <dependency id="DatabaseConnection" class="GoFish\Application\ENFramework\Models">
+                </dependency>
+            </dependencies>
+        </dependency>
+        <dependency id="DatabaseConnection" class="GoFish\Application\ENFramework\Models">
+            <dependencies>
+            </dependencies>
+        </dependency>
+    </dependencies>
+</gofish>
