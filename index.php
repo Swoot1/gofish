@@ -17,17 +17,12 @@ $requestModel = $requestDispatcher->getRequestModel();
 
 $DIXML = simplexml_load_file('Application/Helpers/dependencyinjection.xml');
 
-if($requestModel->getRequestURI()){
-    $DItest = new \GoFish\Application\Helpers\DITest($requestModel, $DIXML);
-    $controller = $DItest->getController(); // TODO use this instead of the controller creator in getRoute
-}
-
+$routing = new \GoFish\Application\Helpers\Routing($requestModel, $DIXML);
 $routeCollection = include_once 'Application/Helpers/RoutesConfiguration.php';
-
 $route = $routeCollection->getRoute($requestModel);
 
 if ($route) {
-    $result = $route->callMethod($requestModel);
+    $result = $routing->callMethod($route);
     $result = json_encode($result ? $result->toArray() : array(), JSON_UNESCAPED_UNICODE);
     header('Content-Type: Application/json; charset=utf-8');
     echo $result;

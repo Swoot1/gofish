@@ -21,8 +21,7 @@ $routes[] = array(
 
 $routes[] = array(
     'resource' => 'session',
-    'controller' => 'SessionController',
-    'requiresAuthorization' => false
+    'controller' => 'SessionController'
 );
 
 $routes[] = array(

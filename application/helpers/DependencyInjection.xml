@@ -1,27 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<!--This is generated automatically. All changes to this file will be overwritten.-->
 <gofish>
     <dependencies>
-        <dependency id="UserService" class="GoFish\Application\Services">
+        <dependency namespace="GoFish\Application\Controllers" class="CaughtFishController">
+            <dependencies/>
+        </dependency>
+        <dependency namespace="GoFish\Application\Controllers" class="FishController">
+            <dependencies/>
+        </dependency>
+        <dependency namespace="GoFish\Application\Controllers" class="SessionController">
+            <dependencies/>
+        </dependency>
+        <dependency namespace="GoFish\Application\Controllers" class="UserController">
             <dependencies>
-                <dependency id="UserMapper" class="GoFish\Application\Mappers">
-                </dependency>
+                <dependency namespace="GoFish\Application\Services" class="UserService"/>
             </dependencies>
         </dependency>
-        <dependency route="user" id="UserController" class="GoFish\Application\Controllers">
+        <dependency namespace="GoFish\Application\Services" class="UserService">
             <dependencies>
-                <dependency id="UserService" class="GoFish\Application\Services">
-                </dependency>
+                <dependency namespace="GoFish\Application\Mappers" class="UserMapper"/>
             </dependencies>
         </dependency>
-        <dependency id="UserMapper" class="GoFish\Application\Mappers">
+        <dependency namespace="GoFish\Application\Mappers" class="UserMapper">
             <dependencies>
-                <dependency id="DatabaseConnection" class="GoFish\Application\ENFramework\Models">
-                </dependency>
+                <dependency namespace="GoFish\Application\ENFramework\Models" class="DatabaseConnection"/>
             </dependencies>
         </dependency>
-        <dependency id="DatabaseConnection" class="GoFish\Application\ENFramework\Models">
-            <dependencies>
-            </dependencies>
+        <dependency namespace="GoFish\Application\ENFramework\Models" class="DatabaseConnection">
+            <dependencies/>
         </dependency>
     </dependencies>
 </gofish>

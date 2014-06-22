@@ -27,66 +27,6 @@ class CaughtFish extends GeneralModel
         parent::__construct($data);
     }
 
-//    public function setId($id) // TODO
-//    {
-//        $this->id = $id;
-//    }
-//
-//    public function getId()
-//    {
-//        return $this->id;
-//    }
-//
-//    public function setFishId($fishId)
-//    {
-//        $this->fishId = $fishId;
-//    }
-//
-//    public function getFishId()
-//    {
-//        return $this->fishId;
-//    }
-//
-//    public function setMeasurement($measurement)
-//    {
-//        $this->measurement = $measurement;
-//    }
-//
-//    public function getMeasurement()
-//    {
-//        return $this->measurement;
-//    }
-//
-//    public function setFishName($name)
-//    {
-//        $this->fishName = $name;
-//    }
-//
-//    public function getFishName()
-//    {
-//        return $this->fishName;
-//    }
-//
-//    public function setUserId($userId)
-//    {
-//        $this->userId = $userId;
-//    }
-//
-//    public function getUserId()
-//    {
-//        return $this->userId;
-//    }
-//
-//    public function setWeight($weight)
-//    {
-//        $this->weight = $weight;
-//    }
-//
-//    public function getWeight()
-//    {
-//        return $this->weight;
-//    }
-
     /**
      * Sets the type and length validation on all properties.
      * @return $this

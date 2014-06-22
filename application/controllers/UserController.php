@@ -21,6 +21,9 @@ class UserController
      */
     private $userService;
 
+    /**
+     * @param UserService $userService
+     */
     public function __construct(UserService $userService)
     {
         $databaseConnection = new DatabaseConnection();
