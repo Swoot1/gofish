@@ -11,9 +11,8 @@ namespace GoFish\Application\Helpers;
 use GoFish\Application\ENFramework\Models\Request;
 use GoFish\Application\Helpers\exceptionHandlers\ApplicationException;
 
-class DITest
+class DependencyInjection
 {
-
     private $dependencyInjectionXML;
 
     public function __construct(\SimpleXMLElement $dependencyInjectionXML)
@@ -21,9 +20,9 @@ class DITest
         $this->dependencyInjectionXML = $dependencyInjectionXML;
     }
 
-    public function getController($controllerName)
+    public function getInstantiatedClass($className)
     {
-        return $this->getClassFromXML(array('class' => $controllerName));
+        return $this->getClassFromXML(array('class' => $className));
     }
 
     /**
@@ -62,8 +61,8 @@ class DITest
     }
 
     /**
-     * Make a string of the attributes i.e. array('route' => 'user', 'id' => 'UserController')
-     * becomes '[@route=user and @id=UserController]'
+     * Make a string of the attributes i.e. array('class' => 'user', 'id' => 'UserController')
+     * becomes '[@class=user and @id=UserController]'
      * @param array $attributes
      * @return string
      */

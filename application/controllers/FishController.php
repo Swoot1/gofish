@@ -9,8 +9,6 @@
 
 namespace GoFish\Application\Controllers;
 
-use GoFish\Application\ENFramework\Models\DatabaseConnection;
-use GoFish\Application\Mappers\FishMapper;
 use GoFish\Application\Services\FishService;
 
 class FishController
@@ -20,54 +18,38 @@ class FishController
      */
     private $fishService;
 
-    public function __construct()
-    {
-        $databaseConnection = new DatabaseConnection();
-        $fishMapper = new FishMapper($databaseConnection);
-        $fishService = new FishService($fishMapper);
-        $this->setFishService($fishService);
-    }
-
-    private function setFishService($fishService)
+    public function __construct(FishService $fishService)
     {
         $this->fishService = $fishService;
     }
 
-    /**
-     * @return \GoFish\Application\Services\FishService
-     */
-    private function getFishService()
-    {
-        return $this->fishService;
-    }
-
     public function index()
     {
-        $fishService = $this->getFishService();
+        $fishService = $this->fishService;
         return $fishService->index();
     }
 
     public function create(array $data)
     {
-        $fishService = $this->getFishService();
+        $fishService = $this->fishService;
         return $fishService->create($data);
     }
 
     public function read($id)
     {
-        $fishService = $this->getFishService();
+        $fishService = $this->fishService;
         return $fishService->read($id);
     }
 
     public function update($id, $requestData)
     {
-        $fishService = $this->getFishService();
+        $fishService = $this->fishService;
         return $fishService->update($id, $requestData);
     }
 
     public function delete($id)
     {
-        $fishService = $this->getFishService();
+        $fishService = $this->fishService;
         return $fishService->delete($id);
     }
 }

@@ -22,12 +22,9 @@ class SessionController
      */
     private $sessionService;
 
-    public function __construct()
+    public function __construct(SessionService $sessionService)
     {
-        $databaseConnection = new DatabaseConnection();
-        $userMapper = new UserMapper($databaseConnection);
-        $userService = new UserService($userMapper);
-        $this->sessionService = new SessionService($userService);
+        $this->sessionService = $sessionService;
     }
 
     public function create(array $data)

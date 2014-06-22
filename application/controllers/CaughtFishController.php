@@ -20,11 +20,8 @@ class CaughtFishController
      */
     private $caughtFishService;
 
-    public function __construct()
+    public function __construct(CaughtFishService $caughtFishService)
     {
-        $databaseConnection = new DatabaseConnection();
-        $caughtFishMapper = new CaughtFishMapper($databaseConnection);
-        $caughtFishService = new CaughtFishService($caughtFishMapper);
         $this->setCaughtFishService($caughtFishService);
     }
 

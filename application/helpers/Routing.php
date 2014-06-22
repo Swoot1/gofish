@@ -62,8 +62,9 @@ class Routing
 
     }
 
-    private function getController($controllerName){
-        $DItest = new \GoFish\Application\Helpers\DITest($this->dependencyInjector);
-        return $DItest->getController($controllerName);
+    private function getController($controllerName)
+    {
+        $dependencyInjectionContainer = new \GoFish\Application\Helpers\DependencyInjection($this->dependencyInjector);
+        return $dependencyInjectionContainer->getInstantiatedClass($controllerName);
     }
 } 
