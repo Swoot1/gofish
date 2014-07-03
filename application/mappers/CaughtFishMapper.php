@@ -49,11 +49,6 @@ class CaughtFishMapper
         $this->databaseConnection = $databaseConnection;
     }
 
-    private function getIndexSQL()
-    {
-        return $this->getIndexSQL;
-    }
-
     public function index()
     {
         $caughtFishData = $this->databaseConnection->runQuery($this->getIndexSQL());

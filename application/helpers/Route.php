@@ -15,66 +15,24 @@ use GoFish\Application\ENFramework\Models\Request;
 class Route
 {
     protected $resource;
-    protected $controller;
+    protected $controllerName;
     protected $requiresAuthorization = true;
     // allowed request methods
 
-    public function __construct(array $data){
-        foreach($data as $key => $value){
+    public function __construct(array $data)
+    {
+        foreach ($data as $key => $value) {
             $this->$key = $value;
         }
     }
 
-    private function getResource()
-    {
-        return $this->resource;
-    }
-
     public function getController()
     {
-        return $this->controller;
+        return $this->controllerName;
     }
 
     public function isMatchingRoute($stringToMatch)
     {
-        return strpos($stringToMatch, $this->getResource()) === 0; // TODO fix this can match fishparty/1 when the user want to go to fish.
+        return $stringToMatch != '' && preg_match(sprintf('/^\/{0,1}%s(\/\d{1,10}){0,1}(\?(\w{0,30}=[\w\d]{0,200}&{0,1}){0,100}){0,1}$/', $this->resource), $stringToMatch) == 1;
     }
-//
-//    /**
-//     * @param $id
-//     * @param Request $request
-//     * @return mixed
-//     * @throws ApplicationException
-//     */
-//    public function callMethod(Request $request) // TODO remove
-//    {
-//        $controller = $this->getController();
-//        if ($request->getRequestMethod() === 'GET') {
-//            if ($id = trim(preg_replace('/' . $this->getResource() . '/', '', $request->getRequestURI()), '/')) {
-//                $result = $controller->read($id);
-//            } else {
-//                $result = $controller->index();
-//            }
-//        } else if ($request->getRequestMethod() === 'DELETE') {
-//            if ($id = trim(preg_replace('/' . $this->getResource() . '/', '', $request->getRequestURI()), '/')) {
-//                $result = $controller->delete($id);
-//            } else {
-//                throw new ApplicationException('Ange ett id för borttagning.');
-//            }
-//        } else if ($request->getRequestMethod() === 'POST') {
-//            $requestData = $request->getRequestData();
-//            $result = $controller->create($requestData);
-//        } else if($request->getRequestMethod() === 'PUT'){
-//            $requestData = $request->getRequestData();
-//            if ($id = trim(preg_replace('/' . $this->getResource() . '/', '', $request->getRequestURI()), '/')) {
-//                $result = $controller->update($id, $requestData);
-//            } else {
-//                throw new ApplicationException('Ange ett id för uppdatering.');
-//            }
-//        }else {
-//            throw new ApplicationException('Ogiltig request-metod.');
-//        }
-//
-//        return $result;
-//    }
 }

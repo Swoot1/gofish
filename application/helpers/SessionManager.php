@@ -10,7 +10,7 @@ namespace GoFish\Application\Helpers;
 
 /**
  * Class SessionManager
- * Stolen from Treehouse http://blog.teamtreehouse.com/how-to-create-bulletproof-sessions
+ * All cred to Treehouse http://blog.teamtreehouse.com/how-to-create-bulletproof-sessions
  * @package GoFish\Application\Helpers
  */
 class SessionManager

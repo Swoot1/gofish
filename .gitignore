@@ -6,5 +6,5 @@
 
 # Ignore PHPStorm settings
 .idea
-temp/
+tmp/
 test.sq3

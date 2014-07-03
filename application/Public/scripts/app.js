@@ -10,19 +10,19 @@ var goFish = angular.module('GoFish', ['ngResource', 'filters', 'ngRoute'])
                 controller: 'FishController'
             })
             .when('/caughtfish/new', {
-                templateUrl: 'application/public/Templates/caughtfish.html',
+                templateUrl: 'application/public/Templates/caughtFish.html',
                 controller: 'CaughtFishController'
             })
             .when('/user/new', {
-                templateUrl: 'application/public/Templates/user.html',
+                templateUrl: 'application/public/Templates/userCreate.html',
                 controller: 'UserController'
             })
             .when('/user/:id', {
-                templateUrl: 'application/public/Templates/user.html',
+                templateUrl: 'application/public/Templates/userUpdate.html',
                 controller: 'UserController'
             })
             .when('/user', {
-                templateUrl: 'application/public/Templates/userlist.html',
+                templateUrl: 'application/public/Templates/userList.html',
                 controller: 'UserListController'
             })
             .when('/login', {

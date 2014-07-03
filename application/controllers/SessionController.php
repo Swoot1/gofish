@@ -8,10 +8,7 @@
 
 namespace GoFish\Application\Controllers;
 
-use GoFish\Application\ENFramework\Models\DatabaseConnection;
-use GoFish\Application\Mappers\UserMapper;
 use GoFish\Application\Services\SessionService;
-use GoFish\Application\Services\UserService;
 
 class SessionController
 {

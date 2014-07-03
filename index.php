@@ -4,7 +4,6 @@ require_once 'Application/Helpers/Autoloader.php';
 require_once 'Application/Helpers/Configuration.php';
 
 putenv('TMP=C:/temp');
-
 $configuration = new \GoFish\Application\Helpers\Configuration();
 $configuration->setUpConfiguration();
 
@@ -15,10 +14,14 @@ $requestDispatcher = new \GoFish\Application\Helpers\RequestDispatcher();
 $requestModel = $requestDispatcher->getRequestModel();
 
 $DICXML = simplexml_load_file('Application/Helpers/DependencyInjectionContainer.xml');
-
 $routing = new \GoFish\Application\Helpers\Routing($requestModel, $DICXML);
 $routeCollection = include_once 'Application/Helpers/RoutesConfiguration.php';
 $route = $routeCollection->getRoute($requestModel);
+
+
+if($route && $requestModel->getRequestURI() != 'session'){
+   session_start();
+}
 
 if ($route) {
     $result = $routing->callMethod($route);

@@ -11,6 +11,9 @@ namespace GoFish\Application\Controllers;
 
 use GoFish\Application\Services\FishService;
 
+// TODO set dependencies with a setDependencies function instead of having them in
+// the constructor so that reflection is not needed and call user func can be used to set the dependencies and
+// the class can be "string instantiated".
 class FishController
 {
     /**

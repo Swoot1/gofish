@@ -8,10 +8,6 @@
 
 namespace Tests\ModelTests;
 
-
-use GoFish\Application\Controllers\UserController;
-use GoFish\Application\Models\User;
-
 class UserTest extends \PHPUnit_Framework_TestCase
 {
 

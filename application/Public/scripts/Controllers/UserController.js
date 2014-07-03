@@ -1,7 +1,7 @@
 /**
  * Created by Elin on 2014-06-16.
  */
-goFish.controller('UserController', ['$scope', '$resource', '$routeParams', function ($scope, $resource, $routeParams) {
+goFish.controller('UserController', ['$scope', '$resource', '$routeParams', '$location', function ($scope, $resource, $routeParams, $location) {
     var UserResource = $resource('user/:id');
 
     if($routeParams.id){
@@ -16,4 +16,17 @@ goFish.controller('UserController', ['$scope', '$resource', '$routeParams', func
             alert('Något gick snett.');
         });
     };
+
+    $scope.updateUser = function(){
+      var updateUserResource = new UserResource($scope.user);
+       updateUserResource.$save({}, function(){
+           alert('Uppdaterat användare');
+       }, function(){
+           alert('Något gick snett.');
+       });
+    };
+
+    $scope.returnToUserList = function(){
+        $location.path('/user');
+    }
 }]);

@@ -11,12 +11,14 @@
         </dependency>
 
         <dependency namespace="GoFish\Application\Controllers" class="FishController">
-            <dependencies/>
+            <dependencies>
+            <dependency namespace="GoFish\Application\Services" class="FishService"/>
+            </dependencies>
         </dependency>
 
         <dependency namespace="GoFish\Application\Controllers" class="SessionController">
             <dependencies>
-                <dependency namespace="GoFish\Application\Services" class="UserService"/>
+                <dependency namespace="GoFish\Application\Services" class="SessionService"/>
             </dependencies>
         </dependency>
 
@@ -43,6 +45,12 @@
         <dependency namespace="GoFish\Application\Services" class="UserService">
             <dependencies>
                 <dependency namespace="GoFish\Application\Mappers" class="UserMapper"/>
+            </dependencies>
+        </dependency>
+
+        <dependency namespace="GoFish\Application\Services" class="SessionService">
+            <dependencies>
+                <dependency namespace="GoFish\Application\Services" class="UserService"/>
             </dependencies>
         </dependency>
 

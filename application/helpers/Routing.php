@@ -10,6 +10,7 @@ namespace GoFish\Application\Helpers;
 
 use GoFish\Application\ENFramework\Models\Request;
 use GoFish\Application\Helpers\exceptionHandlers\ApplicationException;
+use GoFish\Application\Helpers\exceptionHandlers\NoSuchRouteException;
 
 class Routing
 {
@@ -31,40 +32,47 @@ class Routing
      */
     public function callMethod(Route $route)
     {
-        $controller = $this->getController($route->getController());
-        if ($this->request->getRequestMethod() === 'GET') {
-            if ($id = trim(preg_replace('/user/', '', $this->request->getRequestURI()), '/')) { // TODO user is hard coded
+        $controller = $this->getController($route);
+        $requestURIAsArray = explode('/', $this->request->getRequestURI());
+        $id = isset($requestURIAsArray[1]) ? $requestURIAsArray[1] : false;
+        $requestMethod = $this->request->getRequestMethod();
+        $requestData = $this->request->getRequestData();
+
+        if ($requestMethod === 'GET') {
+            if ($id) {
                 $result = $controller->read($id);
             } else {
                 $result = $controller->index();
             }
-        } else if ($this->request->getRequestMethod() === 'DELETE') {
-            if ($id = trim(preg_replace('/user/', '', $this->request->getRequestURI()), '/')) { // TODO user is hard coded
+        } else if ($requestMethod === 'DELETE') {
+            if ($id) {
                 $result = $controller->delete($id);
             } else {
                 throw new ApplicationException('Ange ett id för borttagning.');
             }
-        } else if ($this->request->getRequestMethod() === 'POST') {
-            $requestData = $this->request->getRequestData();
+        } else if ($requestMethod === 'POST') {
             $result = $controller->create($requestData);
-        } else if ($this->request->getRequestMethod() === 'PUT') {
-            $requestData = $this->request->getRequestData();
-            if ($id = trim(preg_replace('/user/', '', $this->request->getRequestURI()), '/')) { // TODO user is hard coded
+        } else if ($requestMethod === 'PUT') {
+            if ($id) {
                 $result = $controller->update($id, $requestData);
             } else {
                 throw new ApplicationException('Ange ett id för uppdatering.');
             }
         } else {
-            throw new ApplicationException('Ogiltig request-metod.');
+            throw new NoSuchRouteException('Ogiltigt request.'); // TODO make an Exception factory in the index.php that returns headers according to the exception type.
         }
 
         return $result;
 
     }
 
-    private function getController($controllerName)
+    /**
+     * @param String $controllerName
+     * @return null|object
+     */
+    private function getController(Route $route)
     {
         $dependencyInjectionContainer = new \GoFish\Application\Helpers\DependencyInjection($this->dependencyInjector);
-        return $dependencyInjectionContainer->getInstantiatedClass($controllerName);
+        return $dependencyInjectionContainer->getInstantiatedClass($route->getController());
     }
 } 
