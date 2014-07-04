@@ -68,7 +68,8 @@ class UserMapper
            user
         SET
           username = :username,
-          email = :email
+          email = :email,
+          password = :password
         WHERE
           id = :id
     ';

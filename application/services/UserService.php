@@ -10,7 +10,7 @@ namespace GoFish\Application\Services;
 
 
 use GoFish\Application\Collections\UserCollection;
-use GoFish\Application\ENFramework\Models\PassWordHash;
+use GoFish\Application\Helpers\exceptionHandlers\ApplicationException;
 use GoFish\Application\Mappers\UserMapper;
 use GoFish\Application\Models\User;
 
@@ -20,30 +20,12 @@ class UserService
 
     public function __construct(UserMapper $userMapper)
     {
-        $this->setUserMapper($userMapper);
-    }
-
-    /**
-     * @param UserMapper $userMapper
-     * @return $this
-     */
-    private function setUserMapper(UserMapper $userMapper)
-    {
         $this->userMapper = $userMapper;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    private function getUserMapper()
-    {
-        return $this->userMapper;
     }
 
     public function index()
     {
-        $userMapper = $this->getUserMapper();
+        $userMapper = $this->userMapper;
         $userData = $userMapper->index();
 
         return new UserCollection($userData);
@@ -53,7 +35,7 @@ class UserService
     {
         $data = $this->hashPassword($data);
         $userModel = new User($data);
-        $userMapper = $this->getUserMapper();
+        $userMapper = $this->userMapper;
         $DBParameters = $userModel->getDBParameters();
         $result = $userMapper->create($DBParameters);
         return $userModel;
@@ -68,7 +50,7 @@ class UserService
 
     public function read($id)
     {
-        $userMapper = $this->getUserMapper();
+        $userMapper = $this->userMapper;
         $userData = $userMapper->read($id);
 
         return $userData ? new User($userData) : null;
@@ -76,32 +58,30 @@ class UserService
 
     public function getUserByEmail($email)
     {
-        $userMapper = $this->getUserMapper();
+        $userMapper = $this->userMapper;
         $userData = $userMapper->getUserByEmail($email);
         return $userData = $userData ? new User($userData) : null;
     }
 
-    public
-    function update($id, $requestData)
+    public function update($id, $requestData)
     {
-        $userMapper = $this->getUserMapper();
+        $userMapper = $this->userMapper;
 
         $savedUser = $this->read($id);
 
         if ($savedUser == null) {
-            throw new \Exception('implement me');
+            throw new ApplicationException('Användaren finns inte.');
         }
-
+        $requestData = $this->hashPassword($requestData);
         $user = new User($requestData);
 
         $userMapper->update($user->getDBParameters());
         return $requestData ? new User($requestData) : null;
     }
 
-    public
-    function delete($id)
+    public function delete($id)
     {
-        $userMapper = $this->getUserMapper();
+        $userMapper = $this->userMapper;
         $userMapper->delete($id);
     }
 } 

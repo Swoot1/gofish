@@ -2,7 +2,7 @@
  * Created by Elin on 2014-06-16.
  */
 goFish.controller('UserController', ['$scope', '$resource', '$routeParams', '$location', function ($scope, $resource, $routeParams, $location) {
-    var UserResource = $resource('user/:id');
+    var UserResource = $resource('user/:id', {id: '@id'}, {update: {method: 'PUT'}});
 
     if($routeParams.id){
         $scope.user = UserResource.get({id : $routeParams.id});
@@ -18,8 +18,9 @@ goFish.controller('UserController', ['$scope', '$resource', '$routeParams', '$lo
     };
 
     $scope.updateUser = function(){
+        debugger;
       var updateUserResource = new UserResource($scope.user);
-       updateUserResource.$save({}, function(){
+       updateUserResource.$update({}, function(){
            alert('Uppdaterat användare');
        }, function(){
            alert('Något gick snett.');

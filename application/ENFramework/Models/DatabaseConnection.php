@@ -21,23 +21,13 @@ class DatabaseConnection implements IDatabaseConnection
     {
         $databaseConnection = new \PDO('sqlite:C:/users/Elin/repos/gofish/test.sq3');
         $databaseConnection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        $this->setDatabaseConnection($databaseConnection);
-    }
-
-    private function getDatabaseConnection()
-    {
-        return $this->databaseConnection;
-    }
-
-    private function setDatabaseConnection($databaseConnection)
-    {
         $this->databaseConnection = $databaseConnection;
     }
 
     public function runQuery($query, $params = array())
     {
         $queryResult = array();
-        $DBConnection = $this->getDatabaseConnection();
+        $DBConnection = $this->databaseConnection;
 
         $stmt = $DBConnection->prepare($query);
         $stmt->execute($params);
