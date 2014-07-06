@@ -7,9 +7,10 @@
 
 namespace GoFish\Tests\ENFrameworkTests\HelperTests;
 
-use GoFish\Application\Helpers\Route;
+use GoFish\Application\ENFramework\Helpers\Route;
 
-class RouteTest extends \PHPUnit_Framework_TestCase {
+class RouteTest extends \PHPUnit_Framework_TestCase
+{
 
     public function testGetController()
     {
@@ -26,7 +27,8 @@ class RouteTest extends \PHPUnit_Framework_TestCase {
     /**
      * Test that isMatchingRoute works with the simplest of test cases.
      */
-    public function testIsMatchingRouteFish(){
+    public function testIsMatchingRouteFish()
+    {
         $route = new Route(array(
             'resource' => 'fish',
             'controllerName' => 'FishController'
@@ -41,7 +43,8 @@ class RouteTest extends \PHPUnit_Framework_TestCase {
     /**
      * Test that isMatchingRoute works with get params.
      */
-    public function testIsMatchingRouteWithGetParams(){
+    public function testIsMatchingRouteWithGetParams()
+    {
         $userRoute = new Route(array(
             'resource' => 'user',
             'controllerName' => 'userController'
@@ -56,7 +59,8 @@ class RouteTest extends \PHPUnit_Framework_TestCase {
     /**
      * Test that it's possible to submit an id and still get matching route.
      */
-    public function testIsMatchingRouteWithId(){
+    public function testIsMatchingRouteWithId()
+    {
         $caughtFishRoute = new Route(array(
             'resource' => 'caughtfish',
             'controllerName' => 'CaughtFishController'
@@ -71,7 +75,8 @@ class RouteTest extends \PHPUnit_Framework_TestCase {
      * Test that a route that doesn't match the route model returns false when calling
      * isMatchingRoute.
      */
-    public function testIsNotMatchingRoute(){
+    public function testIsNotMatchingRoute()
+    {
         $fishRoute = new Route(array(
             'resource' => 'fish',
             'controllerName' => 'FishController'
