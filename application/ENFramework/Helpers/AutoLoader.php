@@ -16,6 +16,6 @@ class AutoLoader
     public function setUpAutoLoader()
     {
         spl_autoload_extensions('.php');
-        spl_autoload_register();
+        spl_autoload_register('spl_autoload');
     }
 }

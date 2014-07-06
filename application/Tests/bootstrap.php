@@ -4,8 +4,9 @@
  * User: Elin
  * Date: 2014-07-04
  * Time: 09:13
+ *
+ * This file runs before the PHPUnit tests are executed.
+ *
  */
 
-set_include_path('C:/Users/Elin/repos'); // TODO not hardcode
-spl_autoload_extensions('.php');
-spl_autoload_register('spl_autoload');
+require_once '../ENFramework/Helpers/Configuration.php';

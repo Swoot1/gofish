@@ -21,6 +21,10 @@ class RequestBuilder
      */
     private $requestModel;
 
+    /**
+     * @param $_SERVER|array $buildSource
+     * @param RequestMethodCollection $requestMethodCollection
+     */
     public function __construct(array $buildSource, RequestMethodCollection $requestMethodCollection)
     {
         $this->setRequestModel($requestMethodCollection);

@@ -18,7 +18,7 @@ class CaughtFishMapper
      */
     private $databaseConnection;
 
-    private $getIndexSQL = 'SELECT
+    private $indexSQL = 'SELECT
         caught_fish.id AS id,
         fish_id AS fishId,
         user_id AS userId,
@@ -51,7 +51,7 @@ class CaughtFishMapper
 
     public function index()
     {
-        $caughtFishData = $this->databaseConnection->runQuery($this->getIndexSQL());
+        $caughtFishData = $this->databaseConnection->runQuery($this->indexSQL);
         return $caughtFishData;
     }
 
