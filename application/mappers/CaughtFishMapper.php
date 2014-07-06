@@ -58,7 +58,6 @@ class CaughtFishMapper
     public function create($params)
     {
         unset($params['id']);
-        unset($params['fishName']); // TODO
         $result = $this->databaseConnection->runQuery($this->create, $params);
         return $result;
     }
