@@ -26,7 +26,7 @@ class CaughtFishMapper
         measurement
         FROM caught_fish';
 
-    private $create = '
+    private $createSQL = '
        INSERT INTO
         caught_fish
           (
@@ -58,7 +58,7 @@ class CaughtFishMapper
     public function create($params)
     {
         unset($params['id']);
-        $result = $this->databaseConnection->runQuery($this->create, $params);
+        $result = $this->databaseConnection->runQuery($this->createSQL, $params);
         return $result;
     }
 }

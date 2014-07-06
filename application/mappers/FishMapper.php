@@ -25,7 +25,7 @@ class FishMapper
     FROM
       fish';
 
-    private $create = '
+    private $createSQL = '
        INSERT INTO
         fish
           (
@@ -46,7 +46,7 @@ class FishMapper
     WHERE
       id = :id';
 
-    private $update = '
+    private $updateSQL = '
        UPDATE
            fish
         SET
@@ -55,7 +55,7 @@ class FishMapper
           id = :id
     ';
 
-    private $delete = '
+    private $deleteSQL = '
         DELETE
           FROM
             fish
@@ -68,60 +68,35 @@ class FishMapper
         $this->databaseConnection = $databaseConnection;
     }
 
-    private function getIndexSQL()
-    {
-        return $this->indexSQL;
-    }
-
-    private function getReadSQL()
-    {
-        return $this->readSQL;
-    }
-
-    private function getCreateSQL()
-    {
-        return $this->create;
-    }
-
-    private function getUpdateSQL()
-    {
-        return $this->update;
-    }
-
-    private function getDeleteSQL()
-    {
-        return $this->delete;
-    }
-
     public function index()
     {
-        $fishes = $this->databaseConnection->runQuery($this->getIndexSQL(), array());
+        $fishes = $this->databaseConnection->runQuery($this->indexSQL, array());
         return $fishes;
     }
 
     public function create(array $DBParameters)
     {
         unset($DBParameters['id']);
-        $query = $this->getCreateSQL();
+        $query = $this->createSQL;
         return $this->databaseConnection->runQuery($query, $DBParameters);
     }
 
     public function update(array $DBParameters)
     {
-        $query = $this->getUpdateSQL();
+        $query = $this->updateSQL;
         return $this->databaseConnection->runQuery($query, $DBParameters);
     }
 
     public function read($id)
     {
-        $result = $this->databaseConnection->runQuery($this->getReadSQL(), array('id' => $id));
+        $result = $this->databaseConnection->runQuery($this->readSQL, array('id' => $id));
 
         return array_shift($result);
     }
 
     public function delete($id)
     {
-        $query = $this->getDeleteSQL();
+        $query = $this->deleteSQL;
         return $this->databaseConnection->runQuery($query, array('id' => $id));
     }
 }
