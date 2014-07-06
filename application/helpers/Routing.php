@@ -9,8 +9,8 @@ namespace GoFish\Application\Helpers;
 
 
 use GoFish\Application\ENFramework\Models\Request;
-use GoFish\Application\Helpers\exceptionHandlers\ApplicationException;
-use GoFish\Application\Helpers\exceptionHandlers\NoSuchRouteException;
+use GoFish\Application\ENFramework\Helpers\exceptionHandlers\ApplicationException;
+use \GoFish\Application\Helpers\exceptionHandlers\NoSuchRouteException;
 
 class Routing
 {

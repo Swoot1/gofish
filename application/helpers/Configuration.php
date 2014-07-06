@@ -17,7 +17,7 @@ class Configuration {
         $this->setSessionSavePath();
     }
 
-    private function setIncludePath(){
+    private function setIncludePath(){ // TODO set this more available to phpunit.
         set_include_path('C:/Users/Elin/repos/');
     }
 

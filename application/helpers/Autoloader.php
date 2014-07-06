@@ -10,7 +10,7 @@
 namespace GoFish\Application\Helpers;
 
 
-class Autoloader
+class AutoLoader
 {
 
     public function setUpAutoLoader()

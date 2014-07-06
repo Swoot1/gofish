@@ -9,8 +9,7 @@
 
 namespace GoFish\Application\Helpers;
 
-use GoFish\Application\Helpers\exceptionHandlers\ApplicationException;
-use GoFish\Application\ENFramework\Models\Request;
+use GoFish\Application\ENFramework\Helpers\exceptionHandlers\ApplicationException;
 
 class Route
 {

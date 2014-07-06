@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Application/Helpers/Autoloader.php';
+require_once 'Application/Helpers/AutoLoader.php';
 require_once 'Application/Helpers/Configuration.php';
 
 putenv('TMP=C:/temp');

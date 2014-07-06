@@ -7,9 +7,7 @@
 
 namespace GoFish\Application\Helpers;
 
-
-use GoFish\Application\ENFramework\Models\Request;
-use GoFish\Application\Helpers\exceptionHandlers\ApplicationException;
+use GoFish\Application\ENFramework\Helpers\exceptionHandlers\ApplicationException;
 
 class DependencyInjection
 {
@@ -27,10 +25,8 @@ class DependencyInjection
 
     /**
      * Gets the first resource as a reflection class that matches the associated array $attributes
-     * param.
      * @param array $attributes
      * @return null|object
-     * @throws exceptionHandlers\ApplicationException
      */
     private function getClassFromXML(array $attributes)
     {
@@ -95,9 +91,9 @@ class DependencyInjection
     /**
      * Returns an array of the dependencies needed for creating the class
      * from matchingResource.
-     * @param \SimpleXMLElement $matchingResource
+     * @param \SimpleXMLElement $matchingXMLElement
      * @return array
-     * @throws exceptionHandlers\ApplicationException
+     * @throws \GoFish\Application\ENFramework\Helpers\exceptionHandlers\ApplicationException
      */
     private function getClassDependencies(\SimpleXMLElement $matchingXMLElement)
     {
