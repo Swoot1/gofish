@@ -6,12 +6,12 @@
  * Time: 19:24
  */
 
-namespace GoFish\Application\Helpers;
+namespace GoFish\Application\ENFramework\Helpers;
 
 /**
  * Class SessionManager
  * All cred to Treehouse http://blog.teamtreehouse.com/how-to-create-bulletproof-sessions
- * @package GoFish\Application\Helpers
+ * @package GoFish\Application\ENFramework\Helpers
  */
 class SessionManager
 {

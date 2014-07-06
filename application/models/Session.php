@@ -11,7 +11,7 @@ namespace GoFish\Application\Models;
 
 use GoFish\Application\ENFramework\Collections\PropertyValidationCollection;
 use GoFish\Application\ENFramework\Models\GeneralModel;
-use GoFish\Application\Helpers\PropertyValidation;
+use GoFish\Application\ENFramework\Helpers\PropertyValidation;
 
 class Session extends GeneralModel
 {

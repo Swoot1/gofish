@@ -5,12 +5,12 @@
  * Time: 11:19
  */
 
-namespace GoFish\Application\Helpers;
+namespace GoFish\Application\ENFramework\Helpers;
 
 
 use GoFish\Application\ENFramework\Models\Request;
 use GoFish\Application\ENFramework\Helpers\exceptionHandlers\ApplicationException;
-use \GoFish\Application\Helpers\exceptionHandlers\NoSuchRouteException;
+use \GoFish\Application\ENFramework\Helpers\exceptionHandlers\NoSuchRouteException;
 
 class Routing
 {
@@ -72,7 +72,7 @@ class Routing
      */
     private function getController(Route $route)
     {
-        $dependencyInjectionContainer = new \GoFish\Application\Helpers\DependencyInjection($this->dependencyInjector);
+        $dependencyInjectionContainer = new \GoFish\Application\ENFramework\Helpers\DependencyInjection($this->dependencyInjector);
         return $dependencyInjectionContainer->getInstantiatedClass($route->getController());
     }
 } 
