@@ -9,8 +9,6 @@
 
 namespace GoFish\Application\Controllers;
 
-use GoFish\Application\ENFramework\Models\DatabaseConnection;
-use GoFish\Application\Mappers\CaughtFishMapper;
 use GoFish\Application\Services\CaughtFishService;
 
 class CaughtFishController
@@ -22,28 +20,18 @@ class CaughtFishController
 
     public function __construct(CaughtFishService $caughtFishService)
     {
-        $this->setCaughtFishService($caughtFishService);
-    }
-
-    private function setCaughtFishService($caughtFishService)
-    {
         $this->caughtFishService = $caughtFishService;
-    }
-
-    private function getCaughtFishService()
-    {
-        return $this->caughtFishService;
     }
 
     public function index()
     {
-        $caughtFishService = $this->getCaughtFishService();
+        $caughtFishService = $this->caughtFishService;
         return $caughtFishService->index();
     }
 
     public function create(array $data)
     {
-        $caughtFishService = $this->getCaughtFishService();
+        $caughtFishService = $this->caughtFishService;
         return $caughtFishService->create($data);
     }
 }
