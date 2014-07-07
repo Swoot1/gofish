@@ -52,7 +52,6 @@ class FishController
 
     public function delete($id)
     {
-        $fishService = $this->fishService;
-        return $fishService->delete($id);
+        return $this->fishService->delete($id);
     }
 }
