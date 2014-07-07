@@ -28,7 +28,7 @@ class Header
 
     public function setResponseCode($code)
     {
-        $this->responseCode = $code; // TODO validation?
+        $this->responseCode = $code;
     }
 
     public function executeHeader()

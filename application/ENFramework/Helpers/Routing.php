@@ -59,7 +59,7 @@ class Routing
                 throw new ApplicationException('Ange ett id för uppdatering.');
             }
         } else {
-            throw new NoSuchRouteException('Ogiltigt request.'); // TODO make an Exception factory in the index.php that returns headers according to the exception type.
+            throw new NoSuchRouteException('Ogiltigt request.');
         }
 
         return $result;
