@@ -7,7 +7,11 @@
 
 namespace GoFish\Application\ENFramework\Helpers;
 
-
+/**
+ * Class Header
+ * Creates and can execute a header() based on its data.
+ * @package GoFish\Application\ENFramework\Helpers
+ */
 class Header
 {
 

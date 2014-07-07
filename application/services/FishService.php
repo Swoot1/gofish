@@ -9,6 +9,7 @@
 namespace GoFish\Application\Services;
 
 use GoFish\Application\Collections\FishCollection;
+use GoFish\Application\ENFramework\Helpers\exceptionHandlers\ApplicationException;
 use GoFish\Application\Mappers\FishMapper;
 use GoFish\Application\Models\Fish;
 
@@ -49,7 +50,7 @@ class FishService
         $savedFish = $this->read($id);
 
         if ($savedFish == null) {
-            throw new \Exception('implement me');
+            throw new ApplicationException('Kunde inte hitta fisk.');
         }
 
         $fish = new Fish($requestData);
