@@ -8,6 +8,7 @@
 
 namespace GoFish\Application\Controllers;
 
+use GoFish\Application\ENFramework\Helpers\Response;
 use GoFish\Application\Services\UserService;
 
 class UserController
@@ -29,30 +30,46 @@ class UserController
     public function index()
     {
         $userService = $this->userService;
-        return $userService->index();
+        $userCollection = $userService->index();
+        $response = new Response();
+        $response->setData($userCollection->toArray());
+        return $response;
+
     }
 
     public function create(array $data)
     {
         $userService = $this->userService;
-        return $userService->create($data);
+        $user = $userService->create($data);
+        $response = new Response(); // TODO instantiate elsewhere?
+        $response->setData($user->toArray())->setStatusCode(201);
+        return $response;
     }
 
     public function read($id)
     {
         $userService = $this->userService;
-        return $userService->read($id);
+        $user = $userService->read($id);
+        $response = new Response(); // TODO instantiate elsewhere?
+        $response->setData($user->toArray());
+        return $response;
     }
 
     public function update($id, $requestData)
     {
         $userService = $this->userService;
-        return $userService->update($id, $requestData);
+        $user = $userService->update($id, $requestData);
+        $response = new Response(); // TODO instantiate elsewhere?
+        $response->setData($user->toArray());
+        return $response;
     }
 
     public function delete($id)
     {
         $userService = $this->userService;
         $userService->delete($id);
+        $response = new Response(); // TODO instantiate elsewhere?
+        $response->setStatusCode(204);
+        return $response;
     }
 } 

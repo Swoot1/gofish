@@ -9,6 +9,7 @@
 
 namespace GoFish\Application\Controllers;
 
+use GoFish\Application\ENFramework\Helpers\Response;
 use GoFish\Application\Services\FishService;
 
 class FishController
@@ -23,32 +24,50 @@ class FishController
         $this->fishService = $fishService;
     }
 
+    /**
+     * @return Response
+     */
     public function index()
     {
         $fishService = $this->fishService;
-        return $fishService->index();
+        $response = new Response(); // TODO instantiate elsewhere?
+        $fishCollection = $fishService->index();
+        $response->setData($fishCollection->toArray());
+        return $response;
     }
 
     public function create(array $data)
     {
         $fishService = $this->fishService;
-        return $fishService->create($data);
+        $fish = $fishService->create($data);
+        $response = new Response(); // TODO instantiate elsewhere?
+        $response->setData($fish->toArray())->setStatusCode(201);
+        return $response;
     }
 
     public function read($id)
     {
         $fishService = $this->fishService;
-        return $fishService->read($id);
+        $fish = $fishService->read($id);
+        $response = new Response(); // TODO instantiate elsewhere?
+        $response->setData($fish->toArray());
+        return $response;
     }
 
     public function update($id, $requestData)
     {
         $fishService = $this->fishService;
-        return $fishService->update($id, $requestData);
+        $fish = $fishService->update($id, $requestData);
+        $response = new Response(); // TODO instantiate elsewhere?
+        $response->setData($fish->toArray());
+        return $response;
     }
 
     public function delete($id)
     {
-        return $this->fishService->delete($id);
+        $this->fishService->delete($id);
+        $response = new Response(); // TODO instantiate elsewhere?
+        $response->setStatusCode(204);
+        return $response;
     }
 }

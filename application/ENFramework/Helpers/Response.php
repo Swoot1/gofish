@@ -7,18 +7,21 @@
 
 namespace GoFish\Application\ENFramework\Helpers;
 
+use GoFish\Application\ENFramework\Helpers\exceptionHandlers\ApplicationException;
+
 /**
  * Class Header
  * Creates and can execute a header() based on its data.
  * @package GoFish\Application\ENFramework\Helpers
  */
-class Header
+class Response
 {
 
     private $protocol;
-    private $responseCode = 200;
+    private $statusCode = 200;
     private $contentType = 'application/json';
     private $charset = 'utf-8';
+    private $data;
 
     public function __construct()
     {
@@ -28,28 +31,50 @@ class Header
     private function setProtocol()
     {
         $this->protocol = isset($_SERVER["SERVER_PROTOCOL"]) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
+        return $this;
     }
 
-    public function setResponseCode($code)
+    public function setStatusCode($code)
     {
-        $this->responseCode = $code;
+        $this->statusCode = $code;
+        return $this;
     }
 
-    public function executeHeader()
+    public function setData(array $data)
     {
-        $responseString = $this->getHeaderString();
-        header($responseString, true, $this->responseCode);
+        $this->data = $data;
+        return $this;
     }
 
-    private function getHeaderString()
+    /**
+     *
+     * @return $this
+     */
+    public function sendResponse()
     {
-        $headerStringArray = array();
-        $headerStringArray[] = $this->getProtocolString();
-        $headerStringArray[] = $this->getContentTypeString();
-        $headerStringArray[] = $this->getResponseCodeString();
-        $headerStringArray[] = $this->getCharSetString();
+        $this->sendHeaders();
+        $this->sendData();
 
-        return implode(' ', array_filter($headerStringArray));
+        return $this;
+    }
+
+    private function sendHeaders()
+    {
+        $protocol = $this->getProtocolString();
+        $statusCodeText = $this->getResponseCodeString();
+        $charset = $this->getCharsetString();
+        $contentType = $this->getContentTypeString();
+
+        header(sprintf("%s %s", $protocol, $statusCodeText), true, $this->statusCode);
+        header($charset);
+        header($contentType);
+
+        return $this;
+    }
+
+    private function sendData(){
+        echo $this->getFormattedData();
+        return $this;
     }
 
     private function getProtocolString()
@@ -64,12 +89,16 @@ class Header
 
     private function getResponseCodeString()
     {
-        return $this->responseCode ? sprintf('%s %s', $this->responseCode, $this->getResponseCodeText()) : '';
+        return $this->statusCode ? sprintf('%s %s', $this->statusCode, $this->getResponseCodeText()) : '';
     }
 
+    /**
+     * Returns the text that should go with the response code.
+     * @return string
+     */
     private function getResponseCodeText()
     {
-        switch ($this->responseCode) {
+        switch ($this->statusCode) {
             case 100:
                 $text = 'Continue';
                 break;
@@ -182,7 +211,7 @@ class Header
                 $text = 'HTTP Version not supported';
                 break;
             default:
-                exit('Unknown http status code "' . htmlentities($this->responseCode) . '"');
+                exit('Unknown http status code "' . htmlentities($this->statusCode) . '"');
                 break;
         }
 
@@ -191,6 +220,31 @@ class Header
 
     private function getCharsetString()
     {
-        return $this->charset ? sprintf('charset:%s', $this->charset) : '';
+        return $this->charset ? sprintf('Charset:%s', $this->charset) : '';
+    }
+
+    /**
+     * Returns the data as a string formatted in the correct contentType.
+     * @return string
+     * @throws exceptionHandlers\ApplicationException
+     * @throws \Exception
+     */
+    private function getFormattedData()
+    {
+        $contentType = mb_strtolower($this->contentType);
+
+        switch ($contentType) {
+            case 'application/json':
+                $formattedData = json_encode($this->data, JSON_UNESCAPED_UNICODE);
+                break;
+            case 'application/xml':
+                throw new \Exception('Implement'); // TODO
+                break;
+            default:
+                throw new ApplicationException('Ange en giltig content-type.');
+                break;
+        }
+
+        return $formattedData;
     }
 } 

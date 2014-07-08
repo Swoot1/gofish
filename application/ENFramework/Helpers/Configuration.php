@@ -8,7 +8,7 @@
  */
 
 // Set where the application is found on disk.
-set_include_path('C:/Users/Elin/repos');
+set_include_path('C:/Users/Elin/repos/');
 
 // Set the folder where the saved session files should go. Change the second argument if you want to change the folder.
 ini_set('session.save_path', 'tmp');
