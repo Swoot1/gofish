@@ -13,9 +13,9 @@ try {
     if ($route && $requestModel->getRequestURI() != 'session') {
         session_start();
     }
-echo $test;
+
     if ($route) {
-        $response = $routing->callethod($route);
+        $response = $routing->callMethod($route);
         $response->sendResponse();
     } else {
         include 'Application\Templates\indexHTML.php';
