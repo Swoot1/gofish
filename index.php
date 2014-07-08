@@ -13,9 +13,9 @@ try {
     if ($route && $requestModel->getRequestURI() != 'session') {
         session_start();
     }
-
+echo $test;
     if ($route) {
-        $response = $routing->callMethod($route);
+        $response = $routing->callethod($route);
         $response->sendResponse();
     } else {
         include 'Application\Templates\indexHTML.php';
@@ -25,7 +25,7 @@ try {
     $errorHTTPStatusCodeFactory = new \GoFish\Application\ENFramework\Helpers\exceptionHandlers\ErrorHTTPStatusCodeFactory($exception);
     $HTTPStatusCode = $errorHTTPStatusCodeFactory->getHTTPStatusCode();
     $header = new \GoFish\Application\ENFramework\Helpers\Response();
-    $header->setResponseCode($HTTPStatusCode);
+    $header->setStatusCode($HTTPStatusCode);
     $header->sendResponse();
 }
 

@@ -14,7 +14,7 @@ use GoFish\Application\ENFramework\Helpers\exceptionHandlers\ApplicationExceptio
  * Creates and can execute a header() based on its data.
  * @package GoFish\Application\ENFramework\Helpers
  */
-class Response
+class Response implements IResponse
 {
 
     private $protocol;
@@ -47,7 +47,7 @@ class Response
     }
 
     /**
-     *
+     * Returns a response to the user based on the objects data.
      * @return $this
      */
     public function sendResponse()
@@ -58,14 +58,17 @@ class Response
         return $this;
     }
 
+    /**
+     * Sends the appropriate headers based on the objects data.
+     * @return $this
+     */
     private function sendHeaders()
     {
-        $protocol = $this->getProtocolString();
         $statusCodeText = $this->getResponseCodeString();
         $charset = $this->getCharsetString();
         $contentType = $this->getContentTypeString();
 
-        header(sprintf("%s %s", $protocol, $statusCodeText), true, $this->statusCode);
+        header(sprintf("%s %s", $this->protocol, $statusCodeText), true, $this->statusCode);
         header($charset);
         header($contentType);
 
@@ -75,11 +78,6 @@ class Response
     private function sendData(){
         echo $this->getFormattedData();
         return $this;
-    }
-
-    private function getProtocolString()
-    {
-        return $this->protocol;
     }
 
     private function getContentTypeString()

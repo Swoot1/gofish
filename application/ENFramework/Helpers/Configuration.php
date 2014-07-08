@@ -17,3 +17,45 @@ ini_set('session.save_path', 'tmp');
 require_once 'AutoLoader.php';
 $autoLoader = new \GoFish\Application\ENFramework\Helpers\Autoloader();
 $autoLoader->setUpAutoLoader();
+
+
+/**
+ * http://stackoverflow.com/questions/841500/php-exceptions-vs-errors
+ * @param $code
+ * @param $message
+ * @param $file
+ * @param $line
+ * @throws GoFish\Application\ENFramework\Helpers\exceptionHandlers\ErrorException
+ */
+function throwErrorException($code, $message, $file, $line)
+{
+    throw new \GoFish\Application\ENFramework\Helpers\exceptionHandlers\ErrorException($code, $message, $file, $line);
+}
+
+set_error_handler('throwErrorException');
+
+/**
+ * http://stackoverflow.com/questions/277224/how-do-i-catch-a-php-fatal-error
+ * @throws GoFish\Application\ENFramework\Helpers\exceptionHandlers\FatalErrorException
+ */
+function fatal_handler()
+{
+
+    $file = "unknown file";
+    $message = "shutdown";
+    $code = E_CORE_ERROR;
+    $line = 0;
+
+    $error = error_get_last();
+
+    if ($error !== NULL) {
+        $code = $error["type"];
+        $file = $error["file"];
+        $line = $error["line"];
+        $message = $error["message"];
+    }
+
+    throw new \GoFish\Application\ENFramework\Helpers\exceptionHandlers\FatalErrorException($code, $message, $file, $line);
+}
+
+register_shutdown_function("fatal_handler");
