@@ -5,9 +5,9 @@ try {
     $requestDispatcher = new \GoFish\Application\ENFramework\Helpers\RequestDispatcher();
     $requestModel = $requestDispatcher->getRequestModel();
 
-    $dependencyInjectionContainer = simplexml_load_file('Application/ENFramework/Helpers/DependencyInjectionContainer.xml');
-    $routing = new \GoFish\Application\ENFramework\Helpers\Routing($requestModel, $dependencyInjectionContainer);
-    $routeCollection = include_once 'Application/ENFramework/Helpers/RoutesConfiguration.php';
+    $dependencyInjectionContainer = simplexml_load_file('Application/ENFramework/Helpers/DependencyInjection/DependencyInjectionContainer.xml');
+    $routing = new \GoFish\Application\ENFramework\Helpers\Routing\Routing($requestModel, $dependencyInjectionContainer);
+    $routeCollection = include_once 'Application/ENFramework/Helpers/Routing/RoutesConfiguration.php';
     $route = $routeCollection->getRoute($requestModel);
 
     if ($route && $requestModel->getRequestURI() != 'session') {
@@ -23,7 +23,7 @@ try {
     }
 
 } catch (Exception $exception) {
-    $errorHTTPStatusCodeFactory = new \GoFish\Application\ENFramework\Helpers\exceptionHandlers\ErrorHTTPStatusCodeFactory($exception);
+    $errorHTTPStatusCodeFactory = new \GoFish\Application\ENFramework\Helpers\ErrorHTTPStatusCodeFactory($exception);
     $HTTPStatusCode = $errorHTTPStatusCodeFactory->getHTTPStatusCode();
     $response = new \GoFish\Application\ENFramework\Helpers\Response();
     $response->setStatusCode($HTTPStatusCode);

@@ -7,14 +7,14 @@
  * To change this template use File | Settings | File Templates.
  */
 
-namespace GoFish\Application\ENFramework\Helpers;
+namespace GoFish\Application\ENFramework\Helpers\Routing;
 
 use GoFish\Application\ENFramework\Collections\GeneralCollection;
 use GoFish\Application\ENFramework\Models\Request;
 
 class RouteCollection extends GeneralCollection
 {
-    protected $model = 'GoFish\Application\ENFramework\Helpers\Route';
+    protected $model = 'GoFish\Application\ENFramework\Helpers\Routing\Route';
 
     public function getRoute(Request $request)
     {

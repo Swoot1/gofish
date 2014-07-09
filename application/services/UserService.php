@@ -10,7 +10,7 @@ namespace GoFish\Application\Services;
 
 
 use GoFish\Application\Collections\UserCollection;
-use GoFish\Application\ENFramework\Helpers\exceptionHandlers\ApplicationException;
+use GoFish\Application\ENFramework\Helpers\Exceptions\ApplicationException;
 use GoFish\Application\Mappers\UserMapper;
 use GoFish\Application\Models\User;
 

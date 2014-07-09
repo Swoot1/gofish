@@ -18,6 +18,5 @@ require_once 'AutoLoader.php';
 $autoLoader = new \GoFish\Application\ENFramework\Helpers\Autoloader();
 $autoLoader->setUpAutoLoader();
 
-// Set up error handlers so that errors are caught and an exception is thrown when they occur.
-$errorHandler = new \GoFish\Application\ENFramework\Helpers\ErrorHandler();
-$errorHandler->setupErrorHandlers();
+// Setup error handlers so that errors such as no such method exists or variable is used but never defined throws an exception.
+require_once 'GoFish\Application\ENFramework\Helpers\ErrorHandling\ErrorHandler.php';

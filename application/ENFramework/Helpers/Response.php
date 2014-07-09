@@ -7,7 +7,7 @@
 
 namespace GoFish\Application\ENFramework\Helpers;
 
-use GoFish\Application\ENFramework\Helpers\exceptionHandlers\ApplicationException;
+use GoFish\Application\ENFramework\Helpers\Exceptions\ApplicationException;
 
 /**
  * Class Header
@@ -224,7 +224,7 @@ class Response implements IResponse
     /**
      * Returns the data as a string formatted in the correct contentType.
      * @return string
-     * @throws exceptionHandlers\ApplicationException
+     * @throws Exceptions\ApplicationException
      * @throws \Exception
      */
     private function getFormattedData()

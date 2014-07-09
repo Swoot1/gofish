@@ -5,9 +5,9 @@
  * Time: 12:49
  */
 
-namespace GoFish\Application\ENFramework\Helpers;
+namespace GoFish\Application\ENFramework\Helpers\DependencyInjection;
 
-use GoFish\Application\ENFramework\Helpers\exceptionHandlers\ApplicationException;
+use GoFish\Application\ENFramework\Helpers\Exceptions\ApplicationException;
 
 class DependencyInjection
 {
@@ -93,7 +93,7 @@ class DependencyInjection
      * from matchingResource.
      * @param \SimpleXMLElement $matchingXMLElement
      * @return array
-     * @throws \GoFish\Application\ENFramework\Helpers\exceptionHandlers\ApplicationException
+     * @throws \GoFish\Application\ENFramework\Helpers\Exceptions\ApplicationException
      */
     private function getClassDependencies(\SimpleXMLElement $matchingXMLElement)
     {

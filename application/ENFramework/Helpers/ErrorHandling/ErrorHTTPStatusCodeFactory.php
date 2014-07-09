@@ -5,8 +5,11 @@
  * Time: 19:48
  */
 
-namespace GoFish\Application\ENFramework\Helpers\exceptionHandlers;
+namespace GoFish\Application\ENFramework\Helpers;
 
+
+use GoFish\Application\ENFramework\Helpers\Exceptions\ApplicationException;
+use GoFish\Application\ENFramework\Helpers\Exceptions\NoSuchRouteException;
 
 class ErrorHTTPStatusCodeFactory
 {

@@ -9,7 +9,7 @@
 namespace GoFish\Application\Services;
 
 
-use GoFish\Application\ENFramework\Helpers\exceptionHandlers\ApplicationException;
+use GoFish\Application\ENFramework\Helpers\Exceptions\ApplicationException;
 use GoFish\Application\ENFramework\Helpers\SessionManager;
 use GoFish\Application\Models\Session;
 

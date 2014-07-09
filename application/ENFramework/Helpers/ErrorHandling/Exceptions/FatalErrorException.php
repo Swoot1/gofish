@@ -5,7 +5,7 @@
  * Time: 21:57
  */
 
-namespace GoFish\Application\ENFramework\Helpers\exceptionHandlers;
+namespace GoFish\Application\ENFramework\Helpers\Exceptions;
 
 
 class FatalErrorException extends \Exception
