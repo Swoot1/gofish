@@ -15,6 +15,9 @@ use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ApplicationE
 
 class Request extends GeneralModel
 {
+    /**
+     * @var \GoFish\Application\Collections\RequestMethodCollection
+     */
     private $requestMethodCollection;
     private $requestMethod;
     private $urlParams;
@@ -39,11 +42,6 @@ class Request extends GeneralModel
     public function getRequestURI()
     {
         return $this->requestURI;
-    }
-
-    private function getRequestMethodCollection()
-    {
-        return $this->requestMethodCollection;
     }
 
     /**
@@ -77,8 +75,7 @@ class Request extends GeneralModel
      */
     private function validateRequestMethod($methodName)
     {
-        $requestMethodCollection = $this->getRequestMethodCollection();
-        $isValidRequestMethod = $requestMethodCollection->isValidRequestMethod($methodName);
+        $isValidRequestMethod = $this->requestMethodCollection->isValidRequestMethod($methodName);
 
         if (!$isValidRequestMethod) {
             throw new ApplicationException('Ange en vettig request-typ för bövelen.');

@@ -9,7 +9,7 @@
 namespace GoFish\Application\Services;
 
 use GoFish\Application\Collections\FishCollection;
-use GoFish\Application\ENFramework\Helpers\Exceptions\ApplicationException;
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ApplicationException;
 use GoFish\Application\Mappers\FishMapper;
 use GoFish\Application\Models\Fish;
 

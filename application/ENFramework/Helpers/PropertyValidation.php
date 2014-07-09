@@ -8,7 +8,7 @@
  */
 namespace GoFish\Application\ENFramework\Helpers;
 
-use GoFish\Application\ENFramework\Helpers\Exceptions\ApplicationException;
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ApplicationException;
 
 class PropertyValidation
 {
@@ -36,7 +36,7 @@ class PropertyValidation
     /**
      * @param $value
      * @return bool
-     * @throws \GoFish\Application\ENFramework\Helpers\Exceptions\ApplicationException
+     * @throws ApplicationException
      */
     private function validateNull($value)
     {
@@ -50,7 +50,7 @@ class PropertyValidation
     /**
      * @param $value
      * @return bool
-     * @throws \GoFish\Application\ENFramework\Helpers\Exceptions\ApplicationException
+     * @throws ApplicationException
      */
     private function validateMinLength($value)
     {
@@ -64,7 +64,7 @@ class PropertyValidation
     /**
      * @param $value
      * @return bool
-     * @throws \GoFish\Application\ENFramework\Helpers\Exceptions\ApplicationException
+     * @throws ApplicationException
      */
     private function validateMaxLength($value)
     {
