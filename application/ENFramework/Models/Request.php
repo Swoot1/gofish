@@ -11,7 +11,6 @@ namespace GoFish\Application\ENFramework\Models;
 
 
 use GoFish\Application\Collections\RequestMethodCollection;
-use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ApplicationException;
 use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\MethodNotAllowedException;
 
 class Request extends GeneralModel
