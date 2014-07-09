@@ -11,7 +11,7 @@ namespace GoFish\Application\ENFramework\Models;
 
 
 use GoFish\Application\Collections\RequestMethodCollection;
-use GoFish\Application\ENFramework\Helpers\Exceptions\ApplicationException;
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ApplicationException;
 
 class Request extends GeneralModel
 {

@@ -7,9 +7,9 @@
 
 namespace GoFish\Tests\ENFrameworkTests\HelperTests;
 
-use GoFish\Application\ENFramework\Helpers\Exceptions\ApplicationException;
-use GoFish\Application\ENFramework\Helpers\Exceptions\ErrorHTTPStatusCodeFactory;
-use GoFish\Application\ENFramework\Helpers\Exceptions\NoSuchRouteException;
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\ErrorHTTPStatusCodeFactory;
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ApplicationException;
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\NoSuchRouteException;
 
 class ErrorHeaderFactoryTest extends \PHPUnit_Framework_TestCase{
 

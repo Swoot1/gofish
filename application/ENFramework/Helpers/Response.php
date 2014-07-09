@@ -6,6 +6,7 @@
  */
 
 namespace GoFish\Application\ENFramework\Helpers;
+
 use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ApplicationException;
 
 /**
@@ -45,6 +46,12 @@ class Response implements IResponse
         return $this;
     }
 
+    public function setContentType($contentType)
+    {
+        $this->contentType = $contentType;
+        return $this;
+    }
+
     /**
      * Returns a response to the user based on the objects data.
      * @return $this
@@ -74,7 +81,8 @@ class Response implements IResponse
         return $this;
     }
 
-    private function sendData(){
+    private function sendData()
+    {
         echo $this->getFormattedData();
         return $this;
     }
@@ -249,7 +257,8 @@ class Response implements IResponse
      * Returns the data array as json.
      * @return string
      */
-    private function convertDataToJSON(){
+    private function convertDataToJSON()
+    {
         return json_encode($this->data, JSON_UNESCAPED_UNICODE);
     }
 
@@ -258,7 +267,8 @@ class Response implements IResponse
      * http://stackoverflow.com/questions/1397036/how-to-convert-array-to-simplexml
      * @return mixed
      */
-    private function convertDataToXML(){
+    private function convertDataToXML()
+    {
         $simpleXMLElement = new \SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><root/>');
         $this->arrayToXML($this->data, $simpleXMLElement);
         return $simpleXMLElement->asXML();
@@ -269,18 +279,19 @@ class Response implements IResponse
      * @param array $data
      * @param \SimpleXMLElement $simpleXMLElement
      */
-    private function arrayToXML(array $data, \SimpleXMLElement $simpleXMLElement){
+    private function arrayToXML(array $data, \SimpleXMLElement $simpleXMLElement)
+    {
 
-        foreach($data as $key => $value){
-            if(is_array($value)){
-                if(!is_numeric($key)){
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                if (!is_numeric($key)) {
                     $subNode = $simpleXMLElement->addChild($key);
                     $this->arrayToXML($value, $subNode);
-                }else{
+                } else {
                     $subNode = $simpleXMLElement->addChild("item$key"); // Todo change this to other than item
                     $this->arrayToXML($value, $subNode);
                 }
-            }else{
+            } else {
                 $simpleXMLElement->addChild($key, htmlspecialchars($value));
             }
         }

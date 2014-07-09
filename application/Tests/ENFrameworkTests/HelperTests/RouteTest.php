@@ -7,7 +7,7 @@
 
 namespace GoFish\Tests\ENFrameworkTests\HelperTests;
 
-use GoFish\Application\ENFramework\Helpers\Route;
+use GoFish\Application\ENFramework\Helpers\Routing\Route;
 
 class RouteTest extends \PHPUnit_Framework_TestCase
 {

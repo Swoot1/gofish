@@ -13,20 +13,20 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test that the undefined variable error throws a ErrorException.
-     * @expectedException \GoFish\Application\ENFramework\Helpers\Exceptions\ErrorException
+     * @expectedException \GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ErrorException
      */
     public function testErrorHandler()
     {
-        require_once 'GoFish\Application\ENFramework\Helpers\ErrorHandler.php';
+        require_once 'GoFish\Application\ENFramework\Helpers\ErrorHandling\ErrorHandler.php';
 
         echo $test;
     }
 
     /**
-     * @expectedException \GoFish\Application\ENFramework\Helpers\Exceptions\FatalErrorException
+     * @expectedException \GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\FatalErrorException
      */
     public function testFatalErrorHandler(){
-        require_once 'GoFish\Application\ENFramework\Helpers\ErrorHandler.php';
+        require_once 'GoFish\Application\ENFramework\Helpers\ErrorHandling\ErrorHandler.php';
 
         array_shif(array());
     }
