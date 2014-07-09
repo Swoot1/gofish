@@ -14,7 +14,7 @@ try {
         session_start();
     }
 
-    // TODO fix trace on errors.
+    // TODO fix trace on errors
     if ($route) {
         $response = $routing->callMethod($route);
         $response->sendResponse();
