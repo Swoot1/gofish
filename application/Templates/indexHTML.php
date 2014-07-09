@@ -15,6 +15,13 @@ echo '<!DOCTYPE html>
     <div ng-controller="SessionController">
         <span logoutbutton>Should be a button</span>
     </div>
+    <div ng-controller="NavigationController">
+        <ul>
+            <li ng-click="navigateToUserList()">Användare</li>
+            <li ng-click="navigateToFishList()">Fiskar</li>
+            <li ng-click="navigateToCaughtFishList()">Fångade fiskar</li>
+        </ul>
+    </div>
     <div ng-view>
     </div>
 </div>
@@ -28,6 +35,7 @@ echo '<!DOCTYPE html>
 <script type="text/javascript" src="Application/Public/Scripts/Controllers/FishController.js"></script>
 <script type="text/javascript" src="Application/Public/Scripts/Controllers/CaughtFishController.js"></script>
 <script type="text/javascript" src="Application/Public/Scripts/Controllers/UserController.js"></script>
+<script type="text/javascript" src="Application/Public/Scripts/Controllers/NavigationController.js"></script>
 <script type="text/javascript" src="Application/Public/Scripts/Controllers/UserListController.js"></script>
 <script type="text/javascript" src="Application/Public/Scripts/Controllers/CaughtFishListController.js"></script>
 <script type="text/javascript" src="Application/Public/Scripts/Controllers/SessionController.js"></script>
