@@ -22,44 +22,13 @@ class RequestBuilder
     private $requestModel;
 
     /**
-     * @param $_SERVER|array $buildSource
+     * @param $_SERVER |array $buildSource
      * @param RequestMethodCollection $requestMethodCollection
      */
     public function __construct(array $buildSource, RequestMethodCollection $requestMethodCollection)
     {
-        $this->setRequestModel($requestMethodCollection);
-        $this->setBuildSource($buildSource);
-    }
-
-    /**
-     * @param array $buildSource
-     */
-    private function setBuildSource(array $buildSource)
-    {
-        $this->buildSource = $buildSource;
-    }
-
-    private function getBuildSource()
-    {
-        return $this->buildSource;
-    }
-
-    /**
-     * @param RequestMethodCollection $requestMethodCollection
-     * @return $this
-     */
-    private function setRequestModel(RequestMethodCollection $requestMethodCollection)
-    {
         $this->requestModel = new Request(array(), $requestMethodCollection);
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    private function getRequestModel()
-    {
-        return $this->requestModel;
+        $this->buildSource = $buildSource;
     }
 
     /**
@@ -71,39 +40,36 @@ class RequestBuilder
         $this->setRequestMethod();
         $this->setResource();
 
-        return $this->getRequestModel();
+        return $this->requestModel;
     }
 
     /**
+     * Sets if the request method is PUT/POST/etc.
      * @return $this
      */
     private function setRequestMethod()
     {
-
-        $buildSource = $this->getBuildSource();
-        $requestMethod = $buildSource['REQUEST_METHOD'];
-
-        $requestModel = $this->getRequestModel();
-        $requestModel->setRequestMethod($requestMethod);
-
+        $requestMethod = $this->buildSource['REQUEST_METHOD'];
+        $this->requestModel->setRequestMethod($requestMethod);
         return $this;
     }
 
     private function setURI()
     {
-        $buildSource = $this->getBuildSource();
-        $this->getRequestModel()->setRequestURI(ltrim($buildSource['REQUEST_URI'], '/'));
-
+        $this->requestModel->setRequestURI(ltrim($this->buildSource['REQUEST_URI'], '/'));
         return $this;
     }
 
+    /**
+     * The url params as an array /user/1 becomes array('user', '1').
+     * @return $this
+     */
     private function setResource()
     {
-        $buildSource = $this->getBuildSource();
-        $parsedURL = parse_url($buildSource['REQUEST_URI']);
+        $parsedURL = parse_url($this->buildSource['REQUEST_URI']);
         $urlParams = array_values(array_filter(explode('/', $parsedURL['path'])));
 
-        $this->getRequestModel()->setURLParams($urlParams);
+        $this->requestModel->setURLParams($urlParams);
 
         return $this;
     }

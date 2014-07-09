@@ -10,7 +10,7 @@ namespace GoFish\Application\Services;
 
 
 use GoFish\Application\Collections\UserCollection;
-use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ApplicationException;
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\NotFoundException;
 use GoFish\Application\Mappers\UserMapper;
 use GoFish\Application\Models\User;
 
@@ -70,7 +70,7 @@ class UserService
         $savedUser = $this->read($id);
 
         if ($savedUser == null) {
-            throw new ApplicationException('Användaren finns inte.');
+            throw new NotFoundException('Användaren finns inte.');
         }
         $requestData = $this->hashPassword($requestData);
         $user = new User($requestData);

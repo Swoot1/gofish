@@ -9,7 +9,10 @@ namespace GoFish\Application\ENFramework\Helpers\ErrorHandling;
 
 
 use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ApplicationException;
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ConflictException;
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\MethodNotAllowedException;
 use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\NoSuchRouteException;
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\NotFoundException;
 
 class ErrorHTTPStatusCodeFactory
 {
@@ -24,9 +27,13 @@ class ErrorHTTPStatusCodeFactory
     public function getHTTPStatusCode()
     {
         if ($this->_exception instanceof ApplicationException) {
-            $HTTPStatusCode = 200;
-        } elseif ($this->_exception instanceof NoSuchRouteException) {
+            $HTTPStatusCode = 403;
+        } elseif ($this->_exception instanceof NoSuchRouteException || $this->_exception instanceof NotFoundException) {
             $HTTPStatusCode = 404;
+        } elseif ($this->_exception instanceof ConflictException) {
+            $HTTPStatusCode = 409;
+        } elseif ($this->_exception instanceof MethodNotAllowedException) {
+            $HTTPStatusCode = 405;
         } else {
             $HTTPStatusCode = 500;
         }

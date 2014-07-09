@@ -40,7 +40,7 @@ class Response implements IResponse
         return $this;
     }
 
-    public function setData(array $data)
+    public function setData($data)
     {
         $this->data = $data;
         return $this;

@@ -8,6 +8,7 @@
 
 namespace GoFish\Application\Controllers;
 
+use GoFish\Application\ENFramework\Helpers\Response;
 use GoFish\Application\Services\SessionService;
 
 class SessionController
@@ -26,7 +27,11 @@ class SessionController
 
     public function create(array $data)
     {
-        return $this->sessionService->create($data);
+        $session = $this->sessionService->create($data);
+        $response = new Response();
+        $response->setData($session->toArray());
+        return $response;
+
     }
 
     public function delete()

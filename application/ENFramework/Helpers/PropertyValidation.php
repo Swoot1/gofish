@@ -41,7 +41,7 @@ class PropertyValidation
     private function validateNull($value)
     {
         if ($value === null && $this->allowNull === false) {
-            throw new ApplicationException(sprintf('Ange ett värde för %s.'));
+            throw new ApplicationException(sprintf('Ange ett värde för %s.', $this->genericName));
         }
 
         return true;
@@ -55,7 +55,7 @@ class PropertyValidation
     private function validateMinLength($value)
     {
         if (strlen($value) < $this->minLength) {
-            throw new ApplicationException(sprintf('%s måste vara minst %s långt.', $this->genericName, $this->minLength));
+            throw new ApplicationException(sprintf('%s måste vara minst %s tecken långt.', $this->genericName, $this->minLength));
         }
 
         return true;

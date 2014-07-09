@@ -29,6 +29,7 @@ try {
     $HTTPStatusCode = $errorHTTPStatusCodeFactory->getHTTPStatusCode();
     $response = new \GoFish\Application\ENFramework\Helpers\Response();
     $response->setStatusCode($HTTPStatusCode);
+    $response->setData(array('Message' => $exception->getMessage()));
     $response->sendResponse();
 }
 

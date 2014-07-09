@@ -6,31 +6,31 @@ var goFish = angular.module('GoFish', ['ngResource', 'filters', 'ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/fish/new', {
-                templateUrl: 'application/public/Templates/fish.html',
+                templateUrl: 'public/Templates/fish.html',
                 controller: 'FishController'
             })
             .when('/caughtfish/new', {
-                templateUrl: 'application/public/Templates/caughtFish.html',
+                templateUrl: 'public/Templates/caughtFish.html',
                 controller: 'CaughtFishController'
             })
             .when('/caughtfish', {
-                templateUrl: 'application/public/Templates/caughtFishList.html',
+                templateUrl: 'public/Templates/caughtFishList.html',
                 controller: 'CaughtFishListController'
             })
             .when('/user/new', {
-                templateUrl: 'application/public/Templates/userCreate.html',
+                templateUrl: 'public/Templates/userCreate.html',
                 controller: 'UserController'
             })
             .when('/user/:id', {
-                templateUrl: 'application/public/Templates/userUpdate.html',
+                templateUrl: 'public/Templates/userUpdate.html',
                 controller: 'UserController'
             })
             .when('/user', {
-                templateUrl: 'application/public/Templates/userList.html',
+                templateUrl: 'public/Templates/userList.html',
                 controller: 'UserListController'
             })
             .when('/login', {
-                templateUrl: 'application/public/Templates/login.html',
+                templateUrl: 'public/Templates/login.html',
                 controller: 'SessionController'
             })
             .otherwise({

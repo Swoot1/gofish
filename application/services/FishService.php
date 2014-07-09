@@ -10,6 +10,7 @@ namespace GoFish\Application\Services;
 
 use GoFish\Application\Collections\FishCollection;
 use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ApplicationException;
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\NotFoundException;
 use GoFish\Application\Mappers\FishMapper;
 use GoFish\Application\Models\Fish;
 
@@ -50,7 +51,7 @@ class FishService
         $savedFish = $this->read($id);
 
         if ($savedFish == null) {
-            throw new ApplicationException('Kunde inte hitta fisk.');
+            throw new NotFoundException('Kunde inte hitta fisk.');
         }
 
         $fish = new Fish($requestData);

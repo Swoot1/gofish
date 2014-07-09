@@ -40,7 +40,7 @@ class ErrorHeaderFactoryTest extends \PHPUnit_Framework_TestCase{
     {
         $applicationException = new ApplicationException('');
         $errorHeaderFactory = new ErrorHTTPStatusCodeFactory($applicationException);
-        $this->assertEquals(200, $errorHeaderFactory->getHTTPStatusCode());
+        $this->assertEquals(403, $errorHeaderFactory->getHTTPStatusCode());
     }
 
 } 

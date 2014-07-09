@@ -23,5 +23,5 @@ interface IResponse
      */
     public function sendResponse();
 
-    public function setData(array $data);
+    public function setData($data);
 }

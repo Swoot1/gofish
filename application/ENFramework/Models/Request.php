@@ -12,6 +12,7 @@ namespace GoFish\Application\ENFramework\Models;
 
 use GoFish\Application\Collections\RequestMethodCollection;
 use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ApplicationException;
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\MethodNotAllowedException;
 
 class Request extends GeneralModel
 {
@@ -78,7 +79,7 @@ class Request extends GeneralModel
         $isValidRequestMethod = $this->requestMethodCollection->isValidRequestMethod($methodName);
 
         if (!$isValidRequestMethod) {
-            throw new ApplicationException('Ange en vettig request-typ för bövelen.');
+            throw new MethodNotAllowedException('Ange en vettig request-typ för bövelen.');
         }
 
         return true;
