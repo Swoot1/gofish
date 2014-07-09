@@ -9,6 +9,7 @@
 
 namespace GoFish\Application\Controllers;
 
+use GoFish\Application\ENFramework\Helpers\Response;
 use GoFish\Application\Services\CaughtFishService;
 
 class CaughtFishController
@@ -26,7 +27,10 @@ class CaughtFishController
     public function index()
     {
         $caughtFishService = $this->caughtFishService;
-        return $caughtFishService->index();
+        $caughtFish = $caughtFishService->index();
+        $response = new Response();
+        $response->setData($caughtFish->toArray());
+        return $response;
     }
 
     public function create(array $data)

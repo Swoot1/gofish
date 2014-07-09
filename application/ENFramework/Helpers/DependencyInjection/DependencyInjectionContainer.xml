@@ -6,13 +6,15 @@
     <dependencies>
 
         <!-- Controllers -->
-        <dependency namespace="GoFish\Application\Controllers" class="CaughtFishController">
-            <dependencies/>
-        </dependency>
-
         <dependency namespace="GoFish\Application\Controllers" class="FishController">
             <dependencies>
                 <dependency namespace="GoFish\Application\Services" class="FishService"/>
+            </dependencies>
+        </dependency>
+
+        <dependency namespace="GoFish\Application\Controllers" class="CaughtFishController">
+            <dependencies>
+                <dependency namespace="GoFish\Application\Services" class="CaughtFishService"/>
             </dependencies>
         </dependency>
 

@@ -13,6 +13,10 @@ var goFish = angular.module('GoFish', ['ngResource', 'filters', 'ngRoute'])
                 templateUrl: 'application/public/Templates/caughtFish.html',
                 controller: 'CaughtFishController'
             })
+            .when('/caughtfish', {
+                templateUrl: 'application/public/Templates/caughtFishList.html',
+                controller: 'CaughtFishListController'
+            })
             .when('/user/new', {
                 templateUrl: 'application/public/Templates/userCreate.html',
                 controller: 'UserController'

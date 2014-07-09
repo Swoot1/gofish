@@ -5,7 +5,7 @@
  * Time: 09:21
  */
 
-namespace GoFish\Application\ENFramework\Helpers\Exceptions;
+namespace GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions;
 
 
 class NoSuchRouteException extends \ErrorException

@@ -6,7 +6,7 @@
  * Time: 15:58
  */
 
-namespace GoFish\Application\ENFramework\Helpers\Exceptions;
+namespace GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions;
 
 
 class ApplicationException extends \ErrorException{

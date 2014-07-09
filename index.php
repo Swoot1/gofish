@@ -1,4 +1,6 @@
 <?php
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\ErrorHTTPStatusCodeFactory;
+
 require_once 'Application/ENFramework/Helpers/Configuration.php';
 
 try {
@@ -23,7 +25,7 @@ try {
     }
 
 } catch (Exception $exception) {
-    $errorHTTPStatusCodeFactory = new \GoFish\Application\ENFramework\Helpers\ErrorHTTPStatusCodeFactory($exception);
+    $errorHTTPStatusCodeFactory = new ErrorHTTPStatusCodeFactory($exception);
     $HTTPStatusCode = $errorHTTPStatusCodeFactory->getHTTPStatusCode();
     $response = new \GoFish\Application\ENFramework\Helpers\Response();
     $response->setStatusCode($HTTPStatusCode);

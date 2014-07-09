@@ -4,8 +4,9 @@
  * Date: 2014-07-09
  * Time: 10:09
  */
-use GoFish\Application\ENFramework\Helpers\Exceptions\ErrorException;
-use GoFish\Application\ENFramework\Helpers\Exceptions\FatalErrorException;
+
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ErrorException;
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\FatalErrorException;
 
 /**
  * Throws an exception when an error occurrs i.e. when a variable is used but never defined.
