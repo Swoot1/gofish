@@ -14,6 +14,7 @@ try {
         session_start();
     }
 
+    // TODO fix trace on errors.
     if ($route) {
         $response = $routing->callMethod($route);
         $response->sendResponse();
@@ -24,9 +25,9 @@ try {
 } catch (Exception $exception) {
     $errorHTTPStatusCodeFactory = new \GoFish\Application\ENFramework\Helpers\exceptionHandlers\ErrorHTTPStatusCodeFactory($exception);
     $HTTPStatusCode = $errorHTTPStatusCodeFactory->getHTTPStatusCode();
-    $header = new \GoFish\Application\ENFramework\Helpers\Response();
-    $header->setStatusCode($HTTPStatusCode);
-    $header->sendResponse();
+    $response = new \GoFish\Application\ENFramework\Helpers\Response();
+    $response->setStatusCode($HTTPStatusCode);
+    $response->sendResponse();
 }
 
 
