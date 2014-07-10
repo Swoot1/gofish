@@ -2,14 +2,14 @@
  * Created by Elin on 2014-04-18.
  */
 
-goFish.controller('FishController', ['$scope', '$filter', '$resource', function ($scope, $filter, $resource) {
-    var FishResource = $resource('/fish/:id');
-    $scope.fishCollection = FishResource.query();
+goFish.controller('FishController', ['$scope', 'Fish', function ($scope, Fish) {
+
+    $scope.fishCollection = Fish.query();
 
     $scope.addFish = function () {
-        var newFish = new FishResource($scope.fish);
+        $scope.fish = new Fish({});
 
-        newFish.$save({}, function (data) {
+        $scope.fish.$save({}, function (data) {
             alert('Sparat fisk!');
             $scope.fishCollection.push(data);
         }, function () {
@@ -19,7 +19,7 @@ goFish.controller('FishController', ['$scope', '$filter', '$resource', function 
 
     $scope.deleteFish = function (fish) {
         var indexOfFish;
-        var fishResource = new FishResource(fish);
+        var fishResource = new Fish(fish);
         fishResource.$delete({id: fish.id},
             function () {
                 alert('Fisk borttagen.');

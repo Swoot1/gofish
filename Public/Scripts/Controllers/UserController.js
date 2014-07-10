@@ -1,16 +1,16 @@
 /**
  * Created by Elin on 2014-06-16.
  */
-goFish.controller('UserController', ['$scope', '$resource', '$routeParams', '$location', function ($scope, $resource, $routeParams, $location) {
-    var UserResource = $resource('user/:id', {id: '@id'}, {update: {method: 'PUT'}});
+goFish.controller('UserController', ['$scope', '$routeParams', '$location', 'User', function ($scope, $routeParams, $location, User) {
 
     if ($routeParams.id) {
-        $scope.user = UserResource.get({id: $routeParams.id});
+        $scope.user = User.get({id: $routeParams.id});
     }
 
+    $scope.user = new User({});
+
     $scope.createUser = function () {
-        var newUserResource = new UserResource($scope.user);
-        newUserResource.$save({}, function () {
+        $scope.user.$save({}, function () {
             alert('Lagt till användare');
         }, function () {
             alert('Något gick snett.');
@@ -18,8 +18,7 @@ goFish.controller('UserController', ['$scope', '$resource', '$routeParams', '$lo
     };
 
     $scope.updateUser = function () {
-        var updateUserResource = new UserResource($scope.user);
-        updateUserResource.$update({}, function () {
+        $scope.user.$update({}, function () {
             alert('Uppdaterat användare');
         }, function () {
             alert('Något gick snett.');

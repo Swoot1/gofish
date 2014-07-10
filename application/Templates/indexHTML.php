@@ -32,6 +32,9 @@ echo '<!DOCTYPE html>
 <script type="text/javascript" src="Public/Scripts/Directives/EnsureUniqueFish.js"></script>
 <script type="text/javascript" src="Public/Scripts/Directives/Focus.js"></script>
 <script type="text/javascript" src="Public/Scripts/Filters.js"></script>
+<script type="text/javascript" src="Public/Scripts/Factories/FishFactory.js"></script>
+<script type="text/javascript" src="Public/Scripts/Factories/CaughtFishFactory.js"></script>
+<script type="text/javascript" src="Public/Scripts/Factories/UserFactory.js"></script>
 <script type="text/javascript" src="Public/Scripts/Controllers/FishController.js"></script>
 <script type="text/javascript" src="Public/Scripts/Controllers/CaughtFishController.js"></script>
 <script type="text/javascript" src="Public/Scripts/Controllers/UserController.js"></script>
