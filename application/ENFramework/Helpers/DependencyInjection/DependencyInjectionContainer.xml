@@ -18,9 +18,9 @@
             </dependencies>
         </dependency>
 
-        <dependency namespace="GoFish\Application\Controllers" class="SessionController">
+        <dependency namespace="GoFish\Application\Controllers" class="AuthorizationController">
             <dependencies>
-                <dependency namespace="GoFish\Application\Services" class="SessionService"/>
+                <dependency namespace="GoFish\Application\Services" class="AuthorizationService"/>
             </dependencies>
         </dependency>
 
@@ -50,7 +50,7 @@
             </dependencies>
         </dependency>
 
-        <dependency namespace="GoFish\Application\Services" class="SessionService">
+        <dependency namespace="GoFish\Application\Services" class="AuthorizationService">
             <dependencies>
                 <dependency namespace="GoFish\Application\Services" class="UserService"/>
             </dependencies>

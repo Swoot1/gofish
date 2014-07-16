@@ -41,7 +41,21 @@ class Routing
 
         if ($requestMethod === 'GET') {
             if ($id) {
-                $result = $controller->read($id);
+
+                if(is_numeric($id)){
+                    $result = $controller->read($id);
+                }else{
+                    $isSubString = array_key_exists(1, $requestURIAsArray) && preg_match('/^[a-z0-9]+$/', $requestURIAsArray[1], $matches);
+
+                    if($isSubString){
+                        if(method_exists($controller, $matches[0])){
+                            $result = call_user_func(array($controller, $matches[0]), $requestData);
+                        }else{
+                            throw new NoSuchRouteException('Ogiltig url.');
+                        }
+                    }
+                }
+
             } else {
                 $result = $controller->index();
             }
@@ -52,7 +66,7 @@ class Routing
                 throw new ApplicationException('Ange ett id för borttagning.');
             }
         } else if ($requestMethod === 'POST') {
-            $result = $controller->create($requestData);
+            $result = $this->casePOST($requestData, $controller, $requestURIAsArray);
         } else if ($requestMethod === 'PUT') {
             if ($id) {
                 $result = $controller->update($id, $requestData);
@@ -65,6 +79,23 @@ class Routing
 
         return $result;
 
+    }
+
+    private function casePOST(array $requestData, $controller, array $requestURIAsArray){
+
+        $isSubString = array_key_exists(1, $requestURIAsArray) && preg_match('/^[a-z0-9]+$/', $requestURIAsArray[1], $matches);
+
+        if($isSubString){
+            if(method_exists($controller, $matches[0])){
+                $result = call_user_func(array($controller, $matches[0]), $requestData);
+            }else{
+                throw new NoSuchRouteException('Ogiltig url.');
+            }
+        }else{
+            $result = $controller->create($requestData);
+        }
+
+        return $result;
     }
 
     /**

@@ -5,9 +5,11 @@ goFish.controller('UserController', ['$scope', '$routeParams', '$location', 'Use
 
     if ($routeParams.id) {
         $scope.user = User.get({id: $routeParams.id});
+    }else{
+        $scope.user = new User({});
     }
 
-    $scope.user = new User({});
+
 
     $scope.createUser = function () {
         $scope.user.$save({}, function () {

@@ -18,6 +18,19 @@ class SessionManager
     static function startSession($name, $limit = 0, $path = '/', $domain = null, $secure = null)
     {
 
+        self::setInitialValues($name, $limit, $path, $domain, $secure);
+
+        session_start();
+
+        if (self::hasSessionExpired()) {
+            self::endSession();
+        } else {
+            self::restoreSession();
+        }
+    }
+
+    static function setInitialValues($name, $limit, $path, $domain, $secure)
+    {
         // Set the cookie name before we start.
         session_name($name . "_Session");
 
@@ -29,24 +42,24 @@ class SessionManager
 
         // Set the cookie settings and start the session
         session_set_cookie_params($limit, $path, $domain, $https, true);
-        session_start();
+    }
 
-        // Make sure the session hasn't expire, and destroy it if it has.
-        if (self::hasSessionExpired()) {
-            self::endSession();
-            session_start();
-        } else {
-            $resetSessionVariable = self::hasTheSessionBeenSetBefore() === false || self::hasTheSessionVariablesChanged();
+    static protected function restoreSession()
+    {
+        $resetSessionVariable = self::hasTheSessionBeenSetBefore() === false || self::hasTheSessionVariablesChanged();
 
-            if ($resetSessionVariable) {
-                $_SESSION = array();
-                $_SESSION['IPAddress'] = $_SERVER['REMOTE_ADDR'];
-                $_SESSION['userAgent'] = $_SERVER['HTTP_USER_AGENT'];
-                // Give a 5% chance of the session id changing on any request.
-            } elseif (rand(1, 100) < 5) {
-                self::regenerateSession();
-            }
+        if ($resetSessionVariable) {
+            self::resetSessionVariables();
+            // Give a 5% chance of the session id changing on any request.
+        } elseif (rand(1, 100) < 5) {
+            self::regenerateSession();
         }
+    }
+
+    static protected function resetSessionVariables()
+    {
+        $_SESSION['IPAddress'] = $_SERVER['REMOTE_ADDR'];
+        $_SESSION['userAgent'] = $_SERVER['HTTP_USER_AGENT'];
     }
 
     /**
@@ -116,12 +129,21 @@ class SessionManager
     }
 
     /**
+     * @param array $userData
+     */
+    static public function setUserData(array $userData)
+    {
+        $_SESSION['user'] = $userData;
+    }
+
+    /**
      * Ends the current session.
      */
     static function endSession()
     {
         $_SESSION = array();
         session_destroy();
+        session_start();
     }
 
 } 

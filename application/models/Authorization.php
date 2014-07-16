@@ -13,7 +13,7 @@ use GoFish\Application\ENFramework\Collections\PropertyValidationCollection;
 use GoFish\Application\ENFramework\Models\GeneralModel;
 use GoFish\Application\ENFramework\Helpers\PropertyValidation;
 
-class Session extends GeneralModel
+class Authorization extends GeneralModel
 {
     protected $isLoggedIn = false;
 

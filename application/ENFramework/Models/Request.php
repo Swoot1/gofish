@@ -39,6 +39,12 @@ class Request extends GeneralModel
         $this->requestURI = $value;
     }
 
+
+    public function getResource(){
+        $requestURIAsArray = explode('/', $this->requestURI);
+        return array_shift($requestURIAsArray);
+    }
+
     public function getRequestURI()
     {
         return $this->requestURI;

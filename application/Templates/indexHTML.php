@@ -12,7 +12,7 @@ echo '<!DOCTYPE html>
 </head>
 <body>
 <div id="content">
-    <div ng-controller="SessionController">
+    <div ng-controller="AuthorizationController">
         <span logoutbutton>Should be a button</span>
     </div>
     <div ng-controller="NavigationController">
@@ -35,13 +35,14 @@ echo '<!DOCTYPE html>
 <script type="text/javascript" src="Public/Scripts/Factories/FishFactory.js"></script>
 <script type="text/javascript" src="Public/Scripts/Factories/CaughtFishFactory.js"></script>
 <script type="text/javascript" src="Public/Scripts/Factories/UserFactory.js"></script>
+<script type="text/javascript" src="Public/Scripts/Factories/AuthorizationFactory.js"></script>
 <script type="text/javascript" src="Public/Scripts/Controllers/FishController.js"></script>
 <script type="text/javascript" src="Public/Scripts/Controllers/CaughtFishController.js"></script>
 <script type="text/javascript" src="Public/Scripts/Controllers/UserController.js"></script>
 <script type="text/javascript" src="Public/Scripts/Controllers/NavigationController.js"></script>
 <script type="text/javascript" src="Public/Scripts/Controllers/UserListController.js"></script>
 <script type="text/javascript" src="Public/Scripts/Controllers/CaughtFishListController.js"></script>
-<script type="text/javascript" src="Public/Scripts/Controllers/SessionController.js"></script>
+<script type="text/javascript" src="Public/Scripts/Controllers/AuthorizationController.js"></script>
 <script type="text/javascript" src="Public/Scripts/Controllers/MenuController.js"></script>
 <script type="text/javascript" src="Public/Scripts/Directives/LogOutButton.js"></script>
 </body>

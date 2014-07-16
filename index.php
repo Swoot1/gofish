@@ -1,7 +1,12 @@
 <?php
 use GoFish\Application\ENFramework\Helpers\ErrorHandling\ErrorHTTPStatusCodeFactory;
+use GoFish\Application\ENFramework\Helpers\SessionManager;
 
+require_once 'Application/ENFramework/Helpers/SessionManager.php';
 require_once 'Application/ENFramework/Helpers/Configuration.php';
+require_once 'Application/ENFramework/Helpers/SessionManager.php';
+
+SessionManager::startSession('User');
 
 try {
     $requestDispatcher = new \GoFish\Application\ENFramework\Helpers\RequestDispatcher();
@@ -11,10 +16,6 @@ try {
     $routing = new \GoFish\Application\ENFramework\Helpers\Routing\Routing($requestModel, $dependencyInjectionContainer);
     $routeCollection = include_once 'Application/ENFramework/Helpers/Routing/RoutesConfiguration.php';
     $route = $routeCollection->getRoute($requestModel);
-
-    if ($route && $requestModel->getRequestURI() != 'session') {
-        session_start();
-    }
 
     // TODO fix trace on errors
     if ($route) {
@@ -29,7 +30,7 @@ try {
     $HTTPStatusCode = $errorHTTPStatusCodeFactory->getHTTPStatusCode();
     $response = new \GoFish\Application\ENFramework\Helpers\Response();
     $response->setStatusCode($HTTPStatusCode);
-    $response->setData(array('Message' => $exception->getMessage()));
+    $response->setData(array('message' => $exception->getMessage(), 'file' => $exception->getFile(), 'line' => $exception->getLine()));
     $response->sendResponse();
 }
 

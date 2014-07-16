@@ -21,7 +21,7 @@ class RouteCollection extends GeneralCollection
         $matchingRoute = false;
 
         foreach ($this->data as $route) {
-            if ($route->isMatchingRoute($request->getRequestURI(), $request)) {
+            if ($route->isMatchingRoute($request->getResource())) {
                 $matchingRoute = $route;
                 break;
             }

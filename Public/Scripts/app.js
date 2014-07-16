@@ -29,11 +29,11 @@ var goFish = angular.module('GoFish', ['ngResource', 'filters', 'ngRoute'])
                 templateUrl: 'public/Templates/userList.html',
                 controller: 'UserListController'
             })
-            .when('/login', {
+            .when('/authorization/login', {
                 templateUrl: 'public/Templates/login.html',
-                controller: 'SessionController'
+                controller: 'AuthorizationController'
             })
             .otherwise({
-                redirectTo: '/login'
+                redirectTo: '/authorization/login'
             });
     }]);

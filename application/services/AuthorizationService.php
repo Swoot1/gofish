@@ -1,20 +1,19 @@
 <?php
 /**
- * Created by PhpStorm.
  * User: Elin
- * Date: 2014-04-18
- * Time: 14:40
+ * Date: 2014-07-11
+ * Time: 12:15
  */
 
 namespace GoFish\Application\Services;
 
+
 use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ApplicationException;
 use GoFish\Application\ENFramework\Helpers\SessionManager;
-use GoFish\Application\Models\Session;
+use GoFish\Application\Models\Authorization;
 
-class SessionService // TODO
+class AuthorizationService
 {
-
     private $userService;
 
     public function __construct(UserService $userService)
@@ -22,7 +21,7 @@ class SessionService // TODO
         $this->userService = $userService;
     }
 
-    public function create($data)
+    public function login($data)
     {
         $user = $this->userService->getUserByEmail($data['email']);
         $invalidLogin = $user === null || $user->isValidPassword($data['password']) == false;
@@ -30,13 +29,13 @@ class SessionService // TODO
         if ($invalidLogin) {
             throw new ApplicationException('Fel e-postadress eller användarnamn.');
         } else {
-            SessionManager::startSession('User');
+            SessionManager::setUserData(array($user->toArray()));
         }
 
-        return new Session(array('isLoggedIn' => true));
+        return new Authorization(array('isLoggedIn' => true));
     }
 
-    public function delete()
+    public function logout()
     {
         SessionManager::endSession();
     }
