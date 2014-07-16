@@ -8,7 +8,7 @@
 use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ErrorException;
 
 /**
- * Throws an exception when an error occurrs i.e. when a variable is used but never defined.
+ * Throws an exception when an error occurs i.e. when a variable is used but never defined.
  * http://stackoverflow.com/questions/841500/php-exceptions-vs-errors
  * @param $code
  * @param $message
