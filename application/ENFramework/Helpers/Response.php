@@ -288,7 +288,7 @@ class Response implements IResponse
                     $subNode = $simpleXMLElement->addChild($key);
                     $this->arrayToXML($value, $subNode);
                 } else {
-                    $subNode = $simpleXMLElement->addChild("item$key"); // Todo change this to other than item
+                    $subNode = $simpleXMLElement->addChild("item$key");
                     $this->arrayToXML($value, $subNode);
                 }
             } else {
