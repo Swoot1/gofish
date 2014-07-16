@@ -4,10 +4,8 @@ use GoFish\Application\ENFramework\Helpers\SessionManager;
 
 require_once 'Application/ENFramework/Helpers/SessionManager.php';
 require_once 'Application/ENFramework/Helpers/Configuration.php';
-require_once 'Application/ENFramework/Helpers/SessionManager.php';
 
 SessionManager::startSession('User');
-
 
 try {
     $requestDispatcher = new \GoFish\Application\ENFramework\Helpers\RequestDispatcher();
@@ -18,7 +16,6 @@ try {
     $routeCollection = include_once 'Application/ENFramework/Helpers/Routing/RoutesConfiguration.php';
     $route = $routeCollection->getRoute($requestModel);
 
-    // TODO fix trace on errors
     if ($route) {
         $response = $routing->callMethod($route);
         $response->sendResponse();
@@ -30,7 +27,7 @@ try {
     $HTTPStatusCode = $errorHTTPStatusCodeFactory->getHTTPStatusCode();
     $response = new \GoFish\Application\ENFramework\Helpers\Response();
     $response->setStatusCode($HTTPStatusCode);
-    $response->setData(array('message' => $exception->getMessage(), 'file' => $exception->getFile(), 'line' => $exception->getLine()));
+    $response->setData(array('message' => $exception->getMessage(), 'file' => $exception->getFile(), 'line' => $exception->getLine(), 'trace' => $exception->getTrace()));
     $response->sendResponse();
 }
 
