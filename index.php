@@ -8,6 +8,7 @@ require_once 'Application/ENFramework/Helpers/SessionManager.php';
 
 SessionManager::startSession('User');
 
+
 try {
     $requestDispatcher = new \GoFish\Application\ENFramework\Helpers\RequestDispatcher();
     $requestModel = $requestDispatcher->getRequestModel();
@@ -24,7 +25,6 @@ try {
     } else {
         include 'Application\Templates\indexHTML.php';
     }
-
 } catch (Exception $exception) {
     $errorHTTPStatusCodeFactory = new ErrorHTTPStatusCodeFactory($exception);
     $HTTPStatusCode = $errorHTTPStatusCodeFactory->getHTTPStatusCode();

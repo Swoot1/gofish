@@ -3,7 +3,7 @@
  */
 
 var goFish = angular.module('GoFish', ['ngResource', 'filters', 'ngRoute'])
-    .config(['$routeProvider', function ($routeProvider) {
+    .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
         $routeProvider
             .when('/fish/new', {
                 templateUrl: 'public/Templates/fish.html',
@@ -36,4 +36,6 @@ var goFish = angular.module('GoFish', ['ngResource', 'filters', 'ngRoute'])
             .otherwise({
                 redirectTo: '/authorization/login'
             });
+
+        $httpProvider.interceptors.push('requestErrorInterceptor');
     }]);
