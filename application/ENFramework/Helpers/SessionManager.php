@@ -18,9 +18,9 @@ class SessionManager
     static function startSession($name, $limit = 0, $path = '/', $domain = null, $secure = null)
     {
 
-        self::setInitialValues($name, $limit, $path, $domain, $secure);
-
         session_start();
+
+        self::setInitialValues($name, $limit, $path, $domain, $secure);
 
         if (self::hasSessionExpired()) {
             self::endSession();
@@ -31,7 +31,7 @@ class SessionManager
 
     static function setInitialValues($name, $limit, $path, $domain, $secure)
     {
-        // Set the cookie name before we start.
+        // Set the cookie name.
         session_name($name . "_Session");
 
         // Set the domain to default to the current domain.
@@ -144,6 +144,13 @@ class SessionManager
         $_SESSION = array();
         session_destroy();
         session_start();
+    }
+
+    /**
+     * @return bool
+     */
+    static function isUserLoggedIn(){
+        return isset($_SESSION['user']);
     }
 
 } 

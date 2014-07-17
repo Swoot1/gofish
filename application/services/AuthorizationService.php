@@ -29,7 +29,7 @@ class AuthorizationService
         if ($invalidLogin) {
             throw new ApplicationException('Fel e-postadress eller användarnamn.');
         } else {
-            SessionManager::setUserData(array($user->toArray()));
+            SessionManager::setUserData($user->toArray());
         }
 
         return new Authorization(array('isLoggedIn' => true));

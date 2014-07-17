@@ -13,6 +13,7 @@ use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\ConflictExce
 use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\MethodNotAllowedException;
 use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\NoSuchRouteException;
 use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\NotFoundException;
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\UserIsNotAllowedException;
 
 class ErrorHTTPStatusCodeFactory
 {
@@ -34,6 +35,8 @@ class ErrorHTTPStatusCodeFactory
             $HTTPStatusCode = 409;
         } elseif ($this->_exception instanceof MethodNotAllowedException) {
             $HTTPStatusCode = 405;
+        } else if ($this->_exception instanceof UserIsNotAllowedException) {
+            $HTTPStatusCode = 403;
         } else {
             $HTTPStatusCode = 500;
         }

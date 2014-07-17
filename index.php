@@ -1,5 +1,6 @@
 <?php
 use GoFish\Application\ENFramework\Helpers\ErrorHandling\ErrorHTTPStatusCodeFactory;
+use GoFish\Application\ENFramework\Helpers\ErrorHandling\Exceptions\UserIsNotAllowedException;
 use GoFish\Application\ENFramework\Helpers\SessionManager;
 
 require_once 'Application/ENFramework/Helpers/SessionManager.php';
@@ -17,8 +18,12 @@ try {
     $route = $routeCollection->getRoute($requestModel);
 
     if ($route) {
-        $response = $routing->callMethod($route);
-        $response->sendResponse();
+        if ($route->isUserAllowed()) {
+            $response = $routing->callMethod($route);
+            $response->sendResponse();
+        } else {
+            throw new UserIsNotAllowedException('Du måste logga in för att fortsätta.');
+        }
     } else {
         include 'Application\Templates\indexHTML.php';
     }

@@ -23,7 +23,8 @@ $routes[] = array(
 
 $routes[] = array(
     'resource' => 'authorization',
-    'controllerName' => 'AuthorizationController'
+    'controllerName' => 'AuthorizationController',
+    'requiresAuthorization' => false
 );
 
 $routes[] = array(
